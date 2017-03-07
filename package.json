@@ -1,0 +1,23 @@
+{
+  "name": "github-search",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/madhankumar028/github-search.git"
+  },
+  "keywords": [],
+  "author": "MadhankumarJ <madhankumar028@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/madhankumar028/github-search/issues"
+  },
+  "homepage": "https://github.com/madhankumar028/github-search#readme",
+  "devDependencies": {
+    "lite-server": "^2.2.2"
+  }
+}
