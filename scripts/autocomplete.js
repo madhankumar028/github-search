@@ -3,15 +3,15 @@
     'use strict';
 
     var input = document.getElementById('search');
-    //     users = [];        
     
     const baseUrl = 'https://api.github.com/users';
     
-    input.addEventListener('keyup', function(event) {
-
+    input.addEventListener('keyup', watchChanges);
+    
+    function watchChanges(event) {
         if (input.value.length > 4)
             getUser(input.value);
-    });
+    };
 
     function getUser(userName) {
     
@@ -21,7 +21,6 @@
         xhr.onreadystatechange = function() {            
             if (xhr.readyState == XMLHttpRequest.DONE) {
                 constructUserInfo(JSON.parse(xhr.responseText));
-                // console.log(JSON.parse(xhr.responseText));
             }
         }
 
@@ -30,7 +29,7 @@
     }
 
     function constructUserInfo(user) {
-        console.log(user.login);        
+        console.log(user.login);     
     }
 
 }());
