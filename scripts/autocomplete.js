@@ -4,8 +4,6 @@
 
     var input = document.getElementById('search');
     
-    const baseUrl = 'https://api.github.com/users';
-    
     input.addEventListener('keyup', watchChanges);
     
     function watchChanges(event) {
@@ -14,7 +12,9 @@
     };
 
     function getUser(userName) {
-    
+        
+        const baseUrl = 'https://api.github.com/users';
+
         var xhr = new XMLHttpRequest(),
             url = baseUrl + '/' + userName;
 
@@ -29,7 +29,17 @@
     }
 
     function constructUserInfo(user) {
-        console.log(user.login);     
+
+        var menu = document.getElementById('menu'),
+            p = document.createElement('LI');
+        
+        if (user.login !== undefined) {            
+            var text = document.createTextNode(user.login),
+                para = menu.appendChild(text);      
+        } else {
+            var text = document.createTextNode('user not found'),
+                para = menu.appendChild(text);        
+        }
     }
 
 }());
