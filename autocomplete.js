@@ -2,11 +2,11 @@
 
     'use strict';
 
-    var input = document.getElementById('search');
+    var input = document.getElementById('search'),
+        defaultUsers = ['madhankumar028', 'arunkumar47', 'amkrish'],
+        memoize = {};
     
     const baseUrl = 'https://api.github.com/users';
-
-    var defaultUsers = ['madhankumar028', 'arunkumar47', 'amkrish'];
     
     input.addEventListener('focus', getUsers);
 
@@ -35,7 +35,9 @@
     function getUsers() {
 
         defaultUsers.forEach(function(user) {
-            getDefaultUser(user);
+            if (Object.keys(memoize).length == 0) {
+                getDefaultUser(user);                                
+            }
         });
     }
 
@@ -56,18 +58,25 @@
 
     function constructDefaultUser(user) {
 
-        var userMenu = document.createElement('div'),
+        var autoMenu = document.getElementById('Autocomplete-menu'),
+            userMenu = document.createElement('div'),
             img = document.createElement('img');
 
-        img.setAttribute('img', user.avatar_url);
+        memoize[user.login] = user;
+
+        console.log(memoize);
+
+        userMenu.className = 'pull-left';
+
+        img.setAttribute('src', user.avatar_url);
 
         img.style.width = '30px';
 
         userMenu.appendChild(img);
 
-        // document.getElementById('Autocomplete-menu').appendChild(userMenu);
+        autoMenu.appendChild(userMenu);
 
-        console.log(userMenu);    
+        console.log(autoMenu);    
     }
 
     function constructUserInfo(user) {
