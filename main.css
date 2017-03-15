@@ -36,3 +36,12 @@ body {
     border: 2px solid grey;
     background: transparent;
 }
+
+#loader {
+    display: none;
+}
+
+#autocomplete-menu {
+    margin-top: 50px;
+    text-align: center;
+}
