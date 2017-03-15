@@ -72,29 +72,29 @@
             repo            = document.createElement('div'),
             followers       = document.createElement('div'),
             following       = document.createElement('div'),
-            userName        = document.createTextNode(user.login),
-            info            = document.createTextNode(user.bio),
-            repo            = document.createTextNode(user.public_repos),
-            following       = document.createTextNode(user.following),
-            followers       = document.createTextNode(user.followers);
+            userName        = document.createTextNode(`Name:${user.login}`),
+            info            = document.createTextNode(`Bio:${user.bio}`),
+            repo            = document.createTextNode(`Repo:${user.public_repos}`),
+            following       = document.createTextNode(`Following:${user.following}`),
+            followers       = document.createTextNode(`Followers:${user.followers}`);
 
         memoize[user.login] = user;
 
-        dataset.className       = 'data-set';
-        userMenu.className      = 'user';
-        profileCard.className   = 'profile-card';
-        profileStatus.className = 'profile-status';
-        name.className          = 'user-name';
-        mail.className          = 'mail';
-        bio.className           = 'bio';
-        repo.className          = 'repo';
-        following.className     = 'following';
-        followers.className     = 'followers';
+        dataset.className           = 'data-set';
+        userMenu.className          = 'user';
+        profileDetails.className    = 'profile-details',
+        profileCard.className       = 'profile-card';
+        profileStatus.className     = 'profile-status';
+        name.className              = 'user-name';
+        mail.className              = 'mail';
+        bio.className               = 'bio';
+        repo.className              = 'repo';
+        following.className         = 'following';
+        followers.className         = 'followers';
 
         img.setAttribute('src', user.avatar_url);
         img.style.width = '30px';
-
-        profileDetails.appendChild(profileCard);
+        
         profileDetails.appendChild(userName);
         profileDetails.appendChild(info);
 
