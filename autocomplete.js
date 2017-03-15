@@ -59,7 +59,7 @@
 
     function constructDefaultUser(user) {
 
-        var autoMenu        = document.getElementById('Autocomplete-menu'),
+        var autoMenu        = document.getElementById('autocomplete-menu'),
             dataset         = document.createElement('div'),
             userMenu        = document.createElement('div'),
             profileCard     = document.createElement('div'),
@@ -106,7 +106,11 @@
         profileCard.appendChild(profileDetails);
         profileCard.appendChild(profileStatus);
 
-        console.log(profileCard);
+        userMenu.appendChild(profileCard);
+        dataset.appendChild(userMenu);
+        autoMenu.appendChild(dataset);
+
+        console.log(autoMenu);
 
         // hideLoading();
     }
