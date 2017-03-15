@@ -3,12 +3,12 @@
     'use strict';
 
     var input = document.getElementById('search'),
-        defaultUsers = ['madhankumar028', 'arunkumar47', 'amkrish'],
-        memoize = {};
+        defaultUsers = ['madhankumar028', 'arunkumar47', 'amkrish'];
     
     const baseUrl = 'https://api.github.com/users';
     
     input.addEventListener('focus', getUsers);
+    input.addEventListener('focusout', removeDefaultUsers)
     input.addEventListener('keyup', watchChanges);
     
     function watchChanges(event) {
@@ -34,9 +34,7 @@
     function getUsers() {
 
         defaultUsers.forEach(function(user) {
-            if (Object.keys(memoize).length == 0) {
-                getDefaultUser(user);                                
-            }
+            getDefaultUser(user);                                
         });
     }
 
@@ -72,13 +70,11 @@
             repo            = document.createElement('div'),
             followers       = document.createElement('div'),
             following       = document.createElement('div'),
-            userName        = document.createTextNode(`Name:${user.login}`),
-            info            = document.createTextNode(`Bio:${user.bio}`),
-            repo            = document.createTextNode(`Repo:${user.public_repos}`),
-            following       = document.createTextNode(`Following:${user.following}`),
-            followers       = document.createTextNode(`Followers:${user.followers}`);
-
-        memoize[user.login] = user;
+            userName        = document.createTextNode(`Name: ${user.login}`),
+            info            = document.createTextNode(`Bio: ${user.bio}`),
+            repo            = document.createTextNode(`Repo: ${user.public_repos}`),
+            following       = document.createTextNode(`Following: ${user.following}`),
+            followers       = document.createTextNode(`Followers: ${user.followers}`);
 
         dataset.className           = 'data-set';
         userMenu.className          = 'user';
@@ -95,6 +91,10 @@
         img.setAttribute('src', user.avatar_url);
         img.style.width = '30px';
         
+        dataset.style.margin = '0px 15px';
+        dataset.style.padding = '0px 400px';
+
+
         profileDetails.appendChild(userName);
         profileDetails.appendChild(info);
 
@@ -109,10 +109,16 @@
         userMenu.appendChild(profileCard);
         dataset.appendChild(userMenu);
         autoMenu.appendChild(dataset);
-
-        console.log(autoMenu);
-
         // hideLoading();
+    }
+
+    function removeDefaultUsers() {
+        
+        var autoMenu = document.getElementById('autocomplete-menu');
+        
+        while (autoMenu.firstChild) {
+            autoMenu.removeChild(autoMenu.firstChild);
+        }
     }
 
     function constructUserInfo(user) {
