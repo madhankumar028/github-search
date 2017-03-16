@@ -89,11 +89,19 @@
         followers.className         = 'followers';
 
         img.setAttribute('src', user.avatar_url);
-        img.style.width = '30px';
+        img.style.width = '50px';
+        img.style.position = 'relative';
+        img.style.right = '200px';
+        img.style.margin = '20px 0px 0px 0px';
         
-        dataset.style.margin = '0px 15px';
+        // dataset.style.margin = '50px 15px';
         dataset.style.padding = '0px 400px';
+        // dataset.style.border = '1px solid grey';
 
+        profileDetails.style.position = 'relative';
+        profileDetails.style.margin = '-55px 0px 0px 0px';
+
+        profileStatus.style.padding = '20px 0px 0px 0px';
 
         profileDetails.appendChild(userName);
         profileDetails.appendChild(info);
