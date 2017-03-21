@@ -4,25 +4,33 @@
 
     var input = document.getElementById('search'),
         autoMenu = document.getElementById('autocomplete-menu'),
+        loader = document.getElementById('loader'),
         defaultUsers = ['madhankumar028', 'arunkumar47', 'amkrish'];
     
     const baseUrl = 'https://api.github.com/users';
     
     input.addEventListener('focus', getUsers);
-    input.addEventListener('focusout', removeDefaultUsers)
+    
+    input.addEventListener('focusout', function() {
+        autoMenu.style.visibility = 'hidden';
+    });
+    
     input.addEventListener('keyup', watchChanges);
 
     autoMenu.style.visibility = 'visible';
+    // loader.style.visibility = 'hidden';
     
     function watchChanges(event) {
         if (input.value.length > 4)
             getUserBasedOnKeypress(input.value);
     }
-
+    
     function getUserBasedOnKeypress(userName) {
 
         var xhr = new XMLHttpRequest(),
             url = `${baseUrl}/${userName}`;
+
+        autoMenu.style.visibility = 'visible';        
 
         xhr.onreadystatechange = function() {            
             if (xhr.readyState == XMLHttpRequest.DONE) {
@@ -46,11 +54,10 @@
         var xhr = new XMLHttpRequest(),
             url = `${baseUrl}/${userName}`;
 
-        // showLoading();
+        loader.style.visibility = 'visible';        
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE) {
-                // console.log(JSON.parse(xhr.responseText));
                 if (autoMenu.childNodes.length < 3) {
                     constructDefaultUser(JSON.parse(xhr.responseText));
                 } else {
@@ -122,7 +129,6 @@
         
         dataset.style.margin = '0px';
         dataset.style.padding = '0px 400px';
-        // dataset.style.border = '1px solid grey';
 
         repoLabel.style.marginRight = '10px';
         followersLabel.style.marginRight = '10px';
@@ -151,17 +157,9 @@
         userMenu.appendChild(profileCard);
         dataset.appendChild(userMenu);
         autoMenu.appendChild(dataset);
-        // hideLoading();
-    }
-
-    function removeDefaultUsers() {
         
-        autoMenu.style.visibility = 'hidden';
-        
-        // while (autoMenu.firstChild) {
-        //     autoMenu.removeChild(autoMenu.firstChild);
-        // }
-    }
+        loader.style.visibility = 'hidden';        
+    }    
 
     function constructUserInfo(user) {
 
@@ -176,13 +174,4 @@
                 para = menu.appendChild(text);        
         }
     }
-
-    /*function showLoading() {
-        var loader = document.getElementById('loader').show();
-    }
-
-    function hideLoading() {
-        var loader = document.getElementById('loader').hide();
-    }*/
-
 }());
