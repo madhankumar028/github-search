@@ -3,6 +3,7 @@
     'use strict';
 
     var input = document.getElementById('search'),
+        autoMenu = document.getElementById('autocomplete-menu'),
         defaultUsers = ['madhankumar028', 'arunkumar47', 'amkrish'];
     
     const baseUrl = 'https://api.github.com/users';
@@ -10,6 +11,8 @@
     input.addEventListener('focus', getUsers);
     input.addEventListener('focusout', removeDefaultUsers)
     input.addEventListener('keyup', watchChanges);
+
+    autoMenu.style.visibility = 'visible';
     
     function watchChanges(event) {
         if (input.value.length > 4)
@@ -48,7 +51,11 @@
         xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE) {
                 // console.log(JSON.parse(xhr.responseText));
-                constructDefaultUser(JSON.parse(xhr.responseText));
+                if (autoMenu.childNodes.length < 3) {
+                    constructDefaultUser(JSON.parse(xhr.responseText));
+                } else {
+                    autoMenu.style.visibility = 'visible';                                                                
+                }
             }
         }
 
@@ -58,8 +65,7 @@
 
     function constructDefaultUser(user) {
 
-        var autoMenu        = document.getElementById('autocomplete-menu'),
-            dataset         = document.createElement('div'),
+        var dataset         = document.createElement('div'),
             userMenu        = document.createElement('div'),
             profileCard     = document.createElement('div'),
             profileDetails  = document.createElement('div'),
@@ -73,12 +79,11 @@
             following       = document.createElement('div'),
             repoLabel       = document.createElement('label'),
             followersLabel  = document.createElement('label'),
-            followingLabel  = document.createElement('label'),            
-            userName        = document.createTextNode(`${user.name}`),
-            info            = document.createTextNode(`${user.bio}`),
+            followingLabel  = document.createElement('label'),        
             repo            = document.createTextNode(`Repo: ${user.public_repos}`),
             following       = document.createTextNode(`Following: ${user.following}`),
-            followers       = document.createTextNode(`Followers: ${user.followers}`);
+            followers       = document.createTextNode(`Followers: ${user.followers}`),
+            info, userName;
 
         dataset.className           = 'data-set';
         userMenu.className          = 'user';
@@ -95,6 +100,18 @@
         followersLabel.className    = 'label label-default';
         followingLabel.className    = 'label label-default';
 
+        if (user.bio == null) {
+            info = document.createTextNode(`User has not descried anything about him.`);
+        } else {
+            info = document.createTextNode(`${user.bio}`);            
+        }
+
+        if (user.name == null) {
+            userName = document.createTextNode(`${user.login}`);  
+        } else {
+            userName = document.createTextNode(`${user.name}`);            
+        }
+    
         img.setAttribute('src', user.avatar_url);
         img.style.width = '50px';
         img.style.position = 'relative';
@@ -139,11 +156,11 @@
 
     function removeDefaultUsers() {
         
-        var autoMenu = document.getElementById('autocomplete-menu');
+        autoMenu.style.visibility = 'hidden';
         
-        while (autoMenu.firstChild) {
-            autoMenu.removeChild(autoMenu.firstChild);
-        }
+        // while (autoMenu.firstChild) {
+        //     autoMenu.removeChild(autoMenu.firstChild);
+        // }
     }
 
     function constructUserInfo(user) {
