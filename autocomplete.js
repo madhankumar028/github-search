@@ -47,6 +47,7 @@
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE) {
+                // console.log(JSON.parse(xhr.responseText));
                 constructDefaultUser(JSON.parse(xhr.responseText));
             }
         }
@@ -70,8 +71,11 @@
             repo            = document.createElement('div'),
             followers       = document.createElement('div'),
             following       = document.createElement('div'),
-            userName        = document.createTextNode(`Name: ${user.login}`),
-            info            = document.createTextNode(`Bio: ${user.bio}`),
+            repoLabel       = document.createElement('label'),
+            followersLabel  = document.createElement('label'),
+            followingLabel  = document.createElement('label'),            
+            userName        = document.createTextNode(`${user.name}`),
+            info            = document.createTextNode(`${user.bio}`),
             repo            = document.createTextNode(`Repo: ${user.public_repos}`),
             following       = document.createTextNode(`Following: ${user.following}`),
             followers       = document.createTextNode(`Followers: ${user.followers}`);
@@ -87,16 +91,25 @@
         repo.className              = 'repo';
         following.className         = 'following';
         followers.className         = 'followers';
+        repoLabel.className         = 'label label-default';
+        followersLabel.className    = 'label label-default';
+        followingLabel.className    = 'label label-default';
 
         img.setAttribute('src', user.avatar_url);
         img.style.width = '50px';
         img.style.position = 'relative';
         img.style.right = '200px';
         img.style.margin = '20px 0px 0px 0px';
+
+        bio.style.padding = '10px';
         
-        // dataset.style.margin = '50px 15px';
+        dataset.style.margin = '0px';
         dataset.style.padding = '0px 400px';
         // dataset.style.border = '1px solid grey';
+
+        repoLabel.style.marginRight = '10px';
+        followersLabel.style.marginRight = '10px';
+        followingLabel.style.marginRight = '10px';        
 
         profileDetails.style.position = 'relative';
         profileDetails.style.margin = '-55px 0px 0px 0px';
@@ -106,9 +119,13 @@
         profileDetails.appendChild(userName);
         profileDetails.appendChild(info);
 
-        profileStatus.appendChild(repo);
-        profileStatus.appendChild(following);
-        profileStatus.appendChild(followers);        
+        repoLabel.appendChild(repo);
+        followingLabel.appendChild(following);
+        followersLabel.appendChild(followers);
+
+        profileStatus.appendChild(repoLabel);
+        profileStatus.appendChild(followingLabel);
+        profileStatus.appendChild(followersLabel);        
 
         profileCard.appendChild(img);
         profileCard.appendChild(profileDetails);
