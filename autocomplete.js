@@ -125,9 +125,9 @@
             repo            = document.createElement('div'),
             followers       = document.createElement('div'),
             following       = document.createElement('div'),
-            repoLabel       = document.createElement('label'),
-            followersLabel  = document.createElement('label'),
-            followingLabel  = document.createElement('label'),        
+            repoSpan        = document.createElement('span'),
+            followersSpan   = document.createElement('span'),
+            followingSpan   = document.createElement('span'),        
             repo            = document.createTextNode(`Repo: ${user.public_repos}`),
             following       = document.createTextNode(`Following: ${user.following}`),
             followers       = document.createTextNode(`Followers: ${user.followers}`),
@@ -144,9 +144,6 @@
         repo.className              = 'repo';
         following.className         = 'following';
         followers.className         = 'followers';
-        repoLabel.className         = 'label label-default';
-        followersLabel.className    = 'label label-default';
-        followingLabel.className    = 'label label-default';
 
         if (user.bio == null) {
             info = document.createTextNode(`User has not descried anything about him.`);
@@ -161,6 +158,7 @@
         }
     
         img.setAttribute('src', user.avatar_url);
+        
         img.style.width = '50px';
         img.style.position = 'relative';
         img.style.right = '200px';
@@ -168,28 +166,39 @@
 
         bio.style.padding = '10px';
         
-        dataset.style.margin = '0px';
-        dataset.style.padding = '0px 400px';
+        dataset.style.margin    = '0px';
+        dataset.style.padding   = '0px 400px';
 
-        repoLabel.style.marginRight = '10px';
-        followersLabel.style.marginRight = '10px';
-        followingLabel.style.marginRight = '10px';        
+        repoSpan.style.marginRight  = '10px';
+        repoSpan.style.color        = '#8899a6';
+        repoSpan.style.fontWeight   = '500';        
+
+        followingSpan.style.marginRight = '10px';
+        followingSpan.style.color       = '#8899a6';        
+        followingSpan.style.fontWeight  = '500';
+
+        followersSpan.style.fontWeight   = '10px';        
+        followersSpan.style.color        = '#8899a6';        
+        followersSpan.style.fontWeight   = '500';            
 
         profileDetails.style.position = 'relative';
         profileDetails.style.margin = '-55px 0px 0px 0px';
 
         profileStatus.style.padding = '20px 0px 0px 0px';
 
-        profileDetails.appendChild(userName);
-        profileDetails.appendChild(info);
+        name.appendChild(userName);
+        bio.appendChild(info);
 
-        repoLabel.appendChild(repo);
-        followingLabel.appendChild(following);
-        followersLabel.appendChild(followers);
+        profileDetails.appendChild(name);
+        profileDetails.appendChild(bio);
 
-        profileStatus.appendChild(repoLabel);
-        profileStatus.appendChild(followingLabel);
-        profileStatus.appendChild(followersLabel);        
+        repoSpan.appendChild(repo);
+        followingSpan.appendChild(following);
+        followersSpan.appendChild(followers);
+
+        profileStatus.appendChild(repoSpan);
+        profileStatus.appendChild(followingSpan);
+        profileStatus.appendChild(followersSpan);        
 
         profileCard.appendChild(img);
         profileCard.appendChild(profileDetails);
