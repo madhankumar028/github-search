@@ -10,7 +10,7 @@
     const baseUrl = 'https://api.github.com/users';
     
     /* EventListener for input element (onfocus event) */
-    input.addEventListener('focus', getUsers);
+    input.addEventListener('focus', onfocusHandler);
     
     /* EventListener for input element (focusout event) */
     input.addEventListener('focusout', function() {
@@ -18,7 +18,7 @@
     });
     
     /* EventListener for input element (keyup event) */
-    input.addEventListener('keyup', watchChanges);
+    input.addEventListener('keyup', keyupHandler);
 
     autoMenu.style.visibility = 'visible';
     
@@ -30,7 +30,7 @@
      * @param  {Event} event
      *
      */
-    function watchChanges(event) {
+    function keyupHandler(event) {
         
         autoMenu.style.visibility = 'hidden';        
         
@@ -40,7 +40,7 @@
 
         /* minimum length of github username is 4 */
         if (input.value.length > 4)
-            getUserBasedOnKeypress(input.value);
+            keyupWorker(input.value);
     }
 
     /**
@@ -49,14 +49,14 @@
      * @param  {String} username
      * 
      */
-    function getUserBasedOnKeypress(userName) {
+    function keyupWorker(userName) {
 
         var xhr = new XMLHttpRequest(),
             url = `${baseUrl}/${userName}`;
 
         xhr.onreadystatechange = function() {            
             if (xhr.readyState == XMLHttpRequest.DONE) {
-                // constructUserInfo(JSON.parse(xhr.responseText));
+                // keyupConstructUser(JSON.parse(xhr.responseText));
             }
         }
 
@@ -65,12 +65,15 @@
     }
 
     /**
+     *
+     * Handler for onfocus event
      * @public
+     * 
      */
-    function getUsers() {
+    function onfocusHandler() {
 
         defaultUsers.forEach(function(user) {
-            getDefaultUser(user);                                
+            onfocusWorker(user);                                
         });
     }
 
@@ -80,7 +83,7 @@
      * @param  {String} username
      * 
      */
-    function getDefaultUser(userName) {
+    function onfocusWorker(userName) {
 
         var xhr = new XMLHttpRequest(),
             url = `${baseUrl}/${userName}`;
@@ -92,7 +95,7 @@
 
                 /* restricting the construction of defaultuser after we got them */
                 if (autoMenu.childNodes.length < 3) {
-                    constructDefaultUser(JSON.parse(xhr.responseText));
+                    onfocusConstructUser(JSON.parse(xhr.responseText));
                 } else {
                     autoMenu.style.visibility = 'visible';                                                                
                 }
@@ -111,7 +114,7 @@
      * @param  {Object} user
      * @return {[type]}
      */
-    function constructDefaultUser(user) {
+    function onfocusConstructUser(user) {
 
         var dataset         = document.createElement('div'),
             userMenu        = document.createElement('div'),
@@ -212,7 +215,7 @@
     }    
 
     /*
-    function constructUserInfo(user) {
+    function keyupConstructUser(user) {
 
         var menu = document.getElementById('menu'),
             p = document.createElement('LI');
