@@ -2,39 +2,61 @@
 
     'use strict';
 
-    var input = document.getElementById('search'),
-        autoMenu = document.getElementById('autocomplete-menu'),
-        loader = document.getElementById('loader'),
+    var input        = document.getElementById('search'),
+        autoMenu     = document.getElementById('autocomplete-menu'),
+        loader       = document.getElementById('loader'),
         defaultUsers = ['madhankumar028', 'arunkumar47', 'amkrish'];
     
     const baseUrl = 'https://api.github.com/users';
     
+    /* EventListener for input element (onfocus event) */
     input.addEventListener('focus', getUsers);
     
+    /* EventListener for input element (focusout event) */
     input.addEventListener('focusout', function() {
         autoMenu.style.visibility = 'hidden';
     });
     
+    /* EventListener for input element (keyup event) */
     input.addEventListener('keyup', watchChanges);
 
     autoMenu.style.visibility = 'visible';
-    // loader.style.visibility = 'hidden';
     
+    /* loader.style.visibility = 'hidden'; */
+    
+    /**
+     *
+     * @public
+     * @param  {Event} event
+     *
+     */
     function watchChanges(event) {
+        
+        autoMenu.style.visibility = 'hidden';        
+        
+        /* showing the default users, when there is no keypress */
+        if (input.value.length == 0)
+            autoMenu.style.visibility = 'visible';        
+
+        /* minimum length of github username is 4 */
         if (input.value.length > 4)
             getUserBasedOnKeypress(input.value);
     }
-    
+
+    /**
+     *
+     * @private
+     * @param  {String} username
+     * 
+     */
     function getUserBasedOnKeypress(userName) {
 
         var xhr = new XMLHttpRequest(),
             url = `${baseUrl}/${userName}`;
 
-        autoMenu.style.visibility = 'visible';        
-
         xhr.onreadystatechange = function() {            
             if (xhr.readyState == XMLHttpRequest.DONE) {
-                constructUserInfo(JSON.parse(xhr.responseText));
+                // constructUserInfo(JSON.parse(xhr.responseText));
             }
         }
 
@@ -42,6 +64,9 @@
         xhr.send();
     }
 
+    /**
+     * @public
+     */
     function getUsers() {
 
         defaultUsers.forEach(function(user) {
@@ -49,6 +74,12 @@
         });
     }
 
+    /**
+     *
+     * @private
+     * @param  {String} username
+     * 
+     */
     function getDefaultUser(userName) {
 
         var xhr = new XMLHttpRequest(),
@@ -58,6 +89,8 @@
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE) {
+
+                /* restricting the construction of defaultuser after we got them */
                 if (autoMenu.childNodes.length < 3) {
                     constructDefaultUser(JSON.parse(xhr.responseText));
                 } else {
@@ -70,6 +103,14 @@
         xhr.send();
     }
 
+    /**
+     *
+     * Construction of default user in DOM
+     * 
+     * @pirvate
+     * @param  {Object} user
+     * @return {[type]}
+     */
     function constructDefaultUser(user) {
 
         var dataset         = document.createElement('div'),
@@ -161,6 +202,7 @@
         loader.style.visibility = 'hidden';        
     }    
 
+    /*
     function constructUserInfo(user) {
 
         var menu = document.getElementById('menu'),
@@ -173,5 +215,5 @@
             var text = document.createTextNode('user not found'),
                 para = menu.appendChild(text);        
         }
-    }
+    }*/
 }());
