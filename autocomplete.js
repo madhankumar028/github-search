@@ -40,7 +40,7 @@
 
         /* minimum length of github username is 4 */
         if (input.value.length > 4)
-            keyupWorker(input.value);
+            keyupService(input.value);
     }
 
     /**
@@ -49,14 +49,18 @@
      * @param  {String} username
      * 
      */
-    function keyupWorker(userName) {
+    function keyupService(userName) {
 
         var xhr = new XMLHttpRequest(),
             url = `${baseUrl}/${userName}`;
 
         xhr.onreadystatechange = function() {            
             if (xhr.readyState == XMLHttpRequest.DONE) {
-                // keyupConstructUser(JSON.parse(xhr.responseText));
+                
+                // var isUserValid = validateUser(JSON.parse(xhr.responseText));
+
+                // if (isUserValid)
+                    constructUser(JSON.parse(xhr.responseText));
             }
         }
 
@@ -73,17 +77,18 @@
     function onfocusHandler() {
 
         defaultUsers.forEach(function(user) {
-            onfocusWorker(user);                                
+            onfocusService(user);                                
         });
     }
 
     /**
      *
+     * Worker for onfocus event
      * @private
      * @param  {String} username
      * 
      */
-    function onfocusWorker(userName) {
+    function onfocusService(userName) {
 
         var xhr = new XMLHttpRequest(),
             url = `${baseUrl}/${userName}`;
@@ -95,7 +100,11 @@
 
                 /* restricting the construction of defaultuser after we got them */
                 if (autoMenu.childNodes.length < 3) {
-                    onfocusConstructUser(JSON.parse(xhr.responseText));
+                    
+                    // var isUserValid = validateUser(JSON.parse(xhr.responseText));
+                    
+                    // if (isUserValid)
+                        constructUser(JSON.parse(xhr.responseText));
                 } else {
                     autoMenu.style.visibility = 'visible';                                                                
                 }
@@ -106,15 +115,23 @@
         xhr.send();
     }
 
+    /*function validateUser(user) {
+
+        if (!user)
+            return false;
+
+        return true;
+    }*/
+
     /**
      *
-     * Construction of default user in DOM
+     * onfocus event user constructor
      * 
      * @pirvate
      * @param  {Object} user
      * @return {[type]}
      */
-    function onfocusConstructUser(user) {
+    function constructUser(user) {
 
         var dataset         = document.createElement('div'),
             userMenu        = document.createElement('div'),
@@ -166,8 +183,6 @@
         img.style.position = 'relative';
         img.style.right = '200px';
         img.style.margin = '20px 0px 0px 0px';
-
-        bio.style.padding = '10px';
         
         dataset.style.margin    = '0px';
         dataset.style.padding   = '0px 400px';
@@ -186,8 +201,6 @@
 
         profileDetails.style.position = 'relative';
         profileDetails.style.margin = '-55px 0px 0px 0px';
-
-        profileStatus.style.padding = '20px 0px 0px 0px';
 
         name.appendChild(userName);
         bio.appendChild(info);
@@ -212,20 +225,5 @@
         autoMenu.appendChild(dataset);
         
         loader.style.visibility = 'hidden';        
-    }    
-
-    /*
-    function keyupConstructUser(user) {
-
-        var menu = document.getElementById('menu'),
-            p = document.createElement('LI');
-        
-        if (user.login !== undefined) {     
-            var text = document.createTextNode(user.login),
-                para = menu.appendChild(text);
-        } else {
-            var text = document.createTextNode('user not found'),
-                para = menu.appendChild(text);        
-        }
-    }*/
+    }
 }());
