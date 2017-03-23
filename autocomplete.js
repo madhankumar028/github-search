@@ -25,7 +25,7 @@
     /* EventListener for input element (keyup event) */
     input.addEventListener('keyup', keyupHandler);
 
-    autoMenu.style.visibility = 'visible';
+    // autoMenu.style.visibility = 'visible';
     
     /* loader.style.visibility = 'hidden'; */
     
@@ -84,7 +84,12 @@
     function onfocusHandler() {
 
         defaultUsers.forEach(function(user) {
-            onfocusService(user);                                
+            /* restricting the construction of defaultuser after we got them */              
+            if (autoMenu.childNodes.length < 3) {
+                onfocusService(user);                
+            } else {
+                autoMenu.style.visibility = 'visible';
+            }
         });
     }
 
@@ -101,24 +106,18 @@
             url   = `${baseUrl}/${userName}`,
             event = 'onfocus';
 
-        loader.style.visibility = 'visible';        
+        loader.style.visibility = 'visible';
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE) {
 
-                /* restricting the construction of defaultuser after we got them */
-                if (autoMenu.childNodes.length < 3) {
-                    
-                    var user = JSON.parse(xhr.responseText),
-                        isUserValid = validateUser(user);
-                    
-                    memoize.push(user);
+                var user = JSON.parse(xhr.responseText),
+                    isUserValid = validateUser(user);
+                
+                memoize.push(user);
 
-                    if (isUserValid)                        
-                        constructUser(user, event);
-                } else {
-                    autoMenu.style.visibility = 'visible';                                                                
-                }
+                if (isUserValid)                        
+                    constructUser(user, event);                
             }
         }
 
