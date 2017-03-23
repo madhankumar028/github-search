@@ -5,7 +5,8 @@
     var input        = document.getElementById('search'),
         autoMenu     = document.getElementById('autocomplete-menu'),
         loader       = document.getElementById('loader'),
-        defaultUsers = ['madhankumar028', 'arunkumar47', 'amkrish'];
+        defaultUsers = ['madhankumar028', 'arunkumar47', 'amkrish'],
+        memoize      = [];
     
     const baseUrl = 'https://api.github.com/users';
     
@@ -15,6 +16,10 @@
     /* EventListener for input element (focusout event) */
     input.addEventListener('focusout', function() {
         autoMenu.style.visibility = 'hidden';
+        
+        /*while(autoMenu.firstChild) {
+            autoMenu.removeChild(autoMenu.firstChild);
+        }*/
     });
     
     /* EventListener for input element (keyup event) */
@@ -51,16 +56,18 @@
      */
     function keyupService(userName) {
 
-        var xhr = new XMLHttpRequest(),
-            url = `${baseUrl}/${userName}`;
+        var xhr   = new XMLHttpRequest(),
+            url   = `${baseUrl}/${userName}`,
+            event = 'onfocus';
 
         xhr.onreadystatechange = function() {            
             if (xhr.readyState == XMLHttpRequest.DONE) {
                 
-                // var isUserValid = validateUser(JSON.parse(xhr.responseText));
+                var user = JSON.parse(xhr.responseText),
+                    isUserValid = validateUser(user);
 
-                // if (isUserValid)
-                    constructUser(JSON.parse(xhr.responseText));
+                if (isUserValid)
+                    constructUser(user, event);
             }
         }
 
@@ -90,8 +97,9 @@
      */
     function onfocusService(userName) {
 
-        var xhr = new XMLHttpRequest(),
-            url = `${baseUrl}/${userName}`;
+        var xhr   = new XMLHttpRequest(),
+            url   = `${baseUrl}/${userName}`,
+            event = 'onfocus';
 
         loader.style.visibility = 'visible';        
 
@@ -101,10 +109,13 @@
                 /* restricting the construction of defaultuser after we got them */
                 if (autoMenu.childNodes.length < 3) {
                     
-                    // var isUserValid = validateUser(JSON.parse(xhr.responseText));
+                    var user = JSON.parse(xhr.responseText),
+                        isUserValid = validateUser(user);
                     
-                    // if (isUserValid)
-                        constructUser(JSON.parse(xhr.responseText));
+                    memoize.push(user);
+
+                    if (isUserValid)                        
+                        constructUser(user, event);
                 } else {
                     autoMenu.style.visibility = 'visible';                                                                
                 }
@@ -115,13 +126,21 @@
         xhr.send();
     }
 
-    /*function validateUser(user) {
+    /**
+     * Validates the user and allow for construction
+     *
+     * @private
+     * @param  {Object} user
+     * 
+     * @return {boolean}
+     */
+    function validateUser(user) {
 
-        if (!user)
+        if (user.message)
             return false;
 
         return true;
-    }*/
+    }
 
     /**
      *
@@ -131,7 +150,7 @@
      * @param  {Object} user
      * @return {[type]}
      */
-    function constructUser(user) {
+    function constructUser(user, eventName) {
 
         var dataset         = document.createElement('div'),
             userMenu        = document.createElement('div'),
@@ -224,6 +243,6 @@
         dataset.appendChild(userMenu);
         autoMenu.appendChild(dataset);
         
-        loader.style.visibility = 'hidden';        
+        loader.style.visibility = 'hidden';
     }
 }());
