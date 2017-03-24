@@ -64,9 +64,9 @@
             if (xhr.readyState == XMLHttpRequest.DONE) {
                 
                 var user = JSON.parse(xhr.responseText),
-                    isUserValid = validateUser(user);
+                    isUser = user.message || user;                    
 
-                if (isUserValid)
+                if (isUser !== 'Not Found')
                     constructUser(user, event);
             }
         }
@@ -112,33 +112,17 @@
             if (xhr.readyState == XMLHttpRequest.DONE) {
 
                 var user = JSON.parse(xhr.responseText),
-                    isUserValid = validateUser(user);
+                    isUser = user.message || user;
                 
                 memoize.push(user);
 
-                if (isUserValid)                        
+                if (isUser !== 'Not Found')                        
                     constructUser(user, event);                
             }
         }
 
         xhr.open('GET', url, true);
         xhr.send();
-    }
-
-    /**
-     * Validates the user and allow for construction
-     *
-     * @private
-     * @param  {Object} user
-     * 
-     * @return {boolean}
-     */
-    function validateUser(user) {
-
-        if (user.message)
-            return false;
-
-        return true;
     }
 
     /**
@@ -183,6 +167,9 @@
         following.className         = 'following';
         followers.className         = 'followers';
 
+        if (event == 'keyup')
+            console.log(event);
+        
         if (user.bio == null) {
             info = document.createTextNode(`User has not descried anything about him.`);
         } else {
