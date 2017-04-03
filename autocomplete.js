@@ -2,11 +2,12 @@
 
     'use strict';
 
-    var input        = document.getElementById('search'),
-        autoMenu     = document.getElementById('autocomplete-menu'),
-        loader       = document.getElementById('loader'),
-        defaultUsers = ['madhankumar028', 'arunkumar47', 'amkrish'],
-        memoize      = [];
+    var input               = document.getElementById('search'),
+        autoMenu            = document.getElementById('autocomplete-menu'),
+        loader              = document.getElementById('loader'),
+        defaultUsers        = ['madhankumar028', 'arunkumar47', 'amkrish'],
+        doneTypingInterval  = 5000,  //time in ms, 5 second for example
+        memoize             = [];
     
     const baseUrl = 'https://api.github.com/users';
     
@@ -15,6 +16,7 @@
     
     /* EventListener for input element (focusout event) */
     input.addEventListener('focusout', function() {
+
         autoMenu.style.visibility = 'hidden';
         
         /*while(autoMenu.firstChild) {
@@ -35,8 +37,7 @@
      * @param  {Event} event
      *
      */
-    function keyupHandler(event) {
-        
+    function keyupHandler(event) {        
         autoMenu.style.visibility = 'hidden';        
         
         /* showing the default users, when there is no keypress */
@@ -44,12 +45,16 @@
             autoMenu.style.visibility = 'visible';        
 
         /* minimum length of github username is 4 */
-        if (input.value.length > 4)
-            keyupService(input.value);
+        if (input.value.length > 4) {
+            // clearTimeout(typingTimer);
+            // typingTimer = setTimeout(keyupService(input.value), doneTypingInterval);                        
+            keyupService(input.value)
+        }
     }
 
     /**
-     *
+     * Service for keyupHandler
+     * 
      * @private
      * @param  {String} username
      * 
@@ -57,8 +62,7 @@
     function keyupService(userName) {
 
         var xhr   = new XMLHttpRequest(),
-            url   = `${baseUrl}/${userName}`,
-            event = 'onfocus';
+            url   = `${baseUrl}/${userName}`;
 
         xhr.onreadystatechange = function() {            
             if (xhr.readyState == XMLHttpRequest.DONE) {
@@ -67,7 +71,7 @@
                     isUser = user.message || user;                    
 
                 if (isUser !== 'Not Found')
-                    constructUser(user, event);
+                    constructUser(user, 'keyup');
             }
         }
 
@@ -95,7 +99,7 @@
 
     /**
      *
-     * Worker for onfocus event
+     * Service for onfocus event
      * @private
      * @param  {String} username
      * 
@@ -103,8 +107,7 @@
     function onfocusService(userName) {
 
         var xhr   = new XMLHttpRequest(),
-            url   = `${baseUrl}/${userName}`,
-            event = 'onfocus';
+            url   = `${baseUrl}/${userName}`;
 
         loader.style.visibility = 'visible';
 
@@ -117,7 +120,7 @@
                 memoize.push(user);
 
                 if (isUser !== 'Not Found')                        
-                    constructUser(user, event);                
+                    constructUser(user, 'onfocus');                
             }
         }
 
@@ -154,7 +157,8 @@
             following       = document.createTextNode(`Following: ${user.following}`),
             followers       = document.createTextNode(`Followers: ${user.followers}`),
             info, userName;
-
+        
+        img.className               = 'img-circle';
         dataset.className           = 'data-set';
         userMenu.className          = 'user';
         profileDetails.className    = 'profile-details',
@@ -167,11 +171,11 @@
         following.className         = 'following';
         followers.className         = 'followers';
 
-        if (event == 'keyup')
-            console.log(event);
+        if (eventName === 'keyup')
+            console.log(eventName);
         
         if (user.bio == null) {
-            info = document.createTextNode(`User has not descried anything about him.`);
+            info = document.createTextNode(`${user.login} has not descried anything about him.`);
         } else {
             info = document.createTextNode(`${user.bio}`);            
         }

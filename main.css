@@ -4,7 +4,7 @@
 }
 
 body {
-    background-color: #f2f9ff;
+    background-color: lightgray;
 }
 
 .main {
@@ -34,7 +34,7 @@ body {
     position: relative;
     color: #000;
     z-index: 10;
-    border: 6px solid grey;
+    border: 8px solid darkgrey;
     background: transparent;
 }
 
