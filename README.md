@@ -4,6 +4,15 @@
 
 Tribute to Github.
 
+## Bootstrap the app
+```
+npm install
+npm run dev
+```
+
+
+
+
 Contributing
 ----------------------------------
 
