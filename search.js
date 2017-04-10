@@ -5,7 +5,7 @@
     var input               = document.getElementById('search'),
         autoMenu            = document.getElementById('autocomplete-menu'),
         loader              = document.getElementById('loader'),
-        defaultUsers        = ['madhankumar028', 'arunkumar47', 'amkrish'],
+        defaultUsers        = ['getify', 'vasanthk', 'toddmotto', 'madhankumar028'],
         doneTypingInterval  = 5000,  //time in ms, 5 second for example
         memoize             = [];
     
@@ -46,8 +46,8 @@
 
         /* minimum length of github username is 4 */
         if (input.value.length > 4) {
-            // clearTimeout(typingTimer);
-            // typingTimer = setTimeout(keyupService(input.value), doneTypingInterval);                        
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(keyupService(input.value), doneTypingInterval);
             keyupService(input.value)
         }
     }
@@ -160,7 +160,7 @@
         
         img.className               = 'img-circle';
         dataset.className           = 'data-set';
-        userMenu.className          = 'user';
+        userMenu.className          = 'user-data';
         profileDetails.className    = 'profile-details',
         profileCard.className       = 'profile-card';
         profileStatus.className     = 'profile-status';
@@ -185,9 +185,11 @@
         } else {
             userName = document.createTextNode(`${user.name}`);            
         }
-    
-        img.setAttribute('src', user.avatar_url);
         
+        img.setAttribute('src', user.avatar_url);
+
+        autoMenu.style.boxSizing = 'border-box';
+                
         img.style.width = '50px';
         img.style.position = 'relative';
         img.style.right = '200px';
@@ -195,6 +197,13 @@
         
         dataset.style.margin    = '0px';
         dataset.style.padding   = '0px 400px';
+
+        userMenu.style.marginRight = '50px';
+
+        name.style.fontWeight = 'bold';
+        name.style.fontSize = '14px';
+
+        bio.style.fontSize = '16px'
 
         repoSpan.style.marginRight  = '10px';
         repoSpan.style.color        = '#8899a6';
@@ -206,7 +215,10 @@
 
         followersSpan.style.fontWeight   = '10px';        
         followersSpan.style.color        = '#8899a6';        
-        followersSpan.style.fontWeight   = '500';            
+        followersSpan.style.fontWeight   = '500';
+
+        profileCard.style.paddingLeft = '50px';
+        profileCard.style.boxSizing = 'border-box';
 
         profileDetails.style.position = 'relative';
         profileDetails.style.margin = '-55px 0px 0px 0px';
