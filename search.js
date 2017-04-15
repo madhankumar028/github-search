@@ -7,8 +7,7 @@
         loader              = document.getElementsByClassName('loader'),
         defaultUsers        = ['getify', 'vasanthk', 'toddmotto', 'madhankumar028'],
         doneTypingInterval  = 5000,  //time in ms, 5 second for example
-        memoize             = [],
-        db;
+        memoize             = [];
     
     const baseUrl = 'https://api.github.com/users';
     
@@ -38,7 +37,8 @@
      * @param  {Event} event
      *
      */
-    function keyupHandler(event) {        
+    function keyupHandler(event) {
+        var typingTimer = null;       
         autoMenu.style.visibility = 'hidden';        
         
         /* showing the default users, when there is no keypress */
@@ -48,8 +48,9 @@
         /* minimum length of github username is 4 */
         if (input.value.length > 4) {
             clearTimeout(typingTimer);
-            typingTimer = setTimeout(keyupService(input.value), doneTypingInterval);
-            keyupService(input.value)
+            typingTimer = setTimeout(function() {
+                keyupService(input.value)
+            }, doneTypingInterval);
         }
     }
 
@@ -246,7 +247,7 @@
         dataset.appendChild(userMenu);
         autoMenu.appendChild(dataset);
         
-        loader.style.visibility = 'hidden';
+        // loader.style.visibility = 'hidden';
     }
 
     function init() {
