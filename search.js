@@ -4,10 +4,11 @@
 
     var input               = document.getElementById('search'),
         autoMenu            = document.getElementById('autocomplete-menu'),
-        loader              = document.getElementById('loader'),
+        loader              = document.getElementsByClassName('loader'),
         defaultUsers        = ['getify', 'vasanthk', 'toddmotto', 'madhankumar028'],
         doneTypingInterval  = 5000,  //time in ms, 5 second for example
-        memoize             = [];
+        memoize             = [],
+        db;
     
     const baseUrl = 'https://api.github.com/users';
     
@@ -109,7 +110,7 @@
         var xhr   = new XMLHttpRequest(),
             url   = `${baseUrl}/${userName}`;
 
-        loader.style.visibility = 'visible';
+        // loader.style.visibility = 'visible';
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE) {
@@ -247,4 +248,12 @@
         
         loader.style.visibility = 'hidden';
     }
+
+    function init() {
+        // loader.style.visibility = 'hidden';        
+        console.log(window.indexedDB);        
+    }
+
+    init();
+
 }());
