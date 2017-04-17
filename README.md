@@ -17,4 +17,4 @@ Contributions are welcome. But maintain the consistency. If you are interested t
 Show your interest by clicking :star:
 
 ## Note
-It is in development phase. You the expect the release soon.
+It is in development phase. You the expect the beta release soon.
