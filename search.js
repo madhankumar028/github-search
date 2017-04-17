@@ -11,9 +11,7 @@
     var input               = document.getElementById('search'),
         autoMenu            = document.getElementById('autocomplete-menu'),
         loader              = document.getElementsByClassName('loader'),
-        doneTypingInterval  = 5000;  //time in ms, 5 second for example
-
-    // input.style.backgroundImage  = 'none';
+        doneTypingInterval  = 3000;  //time in ms, 3 seconds for example    
 
     const client_id     = 'b7641fc061fbc7eba0ae',
           defaultUsers  = ['getify', 'vasanthk', 'toddmotto', 'madhankumar028'],        
@@ -44,13 +42,18 @@
         autoMenu.style.visibility = 'hidden';        
         
         /* showing the default users, when there is no keypress */
-        if (input.value.length == 0)
+        if (input.value.length == 0) {
             autoMenu.style.visibility = 'visible';        
+            return;            
+        }
 
         /* minimum length of github username is 4 */
         if (input.value.length > 4) {
             clearTimeout(typingTimer);
             typingTimer = setTimeout(function() {
+                while(autoMenu.firstChild) {
+                    autoMenu.removeChild(autoMenu.firstChild);                        
+                }                
                 keyupService(input.value)
             }, doneTypingInterval);
         }
@@ -72,7 +75,7 @@
                 var user = JSON.parse(xhr.responseText),
                     isUser = user.message || user;                    
 
-                if (isUser !== 'Not Found')
+                if (isUser !== 'Not Found')                   
                     constructUser(user, 'keyup');
             }
         }
@@ -109,7 +112,7 @@
      */
     function onfocusService(userName) {
         var xhr   = new XMLHttpRequest(),
-            url   = `${baseUrl}/${userName}`;
+            url   = `${baseUrl}/${userName}?${apikey}`;
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE) {
@@ -228,5 +231,7 @@
         autoMenu.appendChild(dataset);
 
         input.style.backgroundImage = 'none';
+
+        autoMenu.style.visibility = 'visible';                
     }
 }());
