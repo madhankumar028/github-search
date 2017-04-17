@@ -13,8 +13,8 @@
         loader              = document.getElementsByClassName('loader'),
         doneTypingInterval  = 3000;  //time in ms, 3 seconds for example    
 
-    const client_id     = 'b7641fc061fbc7eba0ae',
-          defaultUsers  = ['getify', 'vasanthk', 'toddmotto', 'madhankumar028'],        
+    const defaultUsers  = ['getify', 'vasanthk', 'toddmotto', 'deedy'],        
+          client_id     = 'b7641fc061fbc7eba0ae',          
           client_secret = '582f452b977885775b36fd81d8bfe51a5d48e59d',
           apikey        = `client_id="${client_id}&client_secret="${client_secret}"`,
           baseUrl       = 'https://api.github.com/users';
@@ -38,8 +38,15 @@
      *
      */
     function keyupHandler(event) {
+        
         var typingTimer = null;       
-        autoMenu.style.visibility = 'hidden';        
+        
+        autoMenu.style.visibility = 'hidden';
+
+        if (event.which === 46) {
+            autoMenu.style.visibility = 'visible';            
+            return;            
+        }
         
         /* showing the default users, when there is no keypress */
         if (input.value.length == 0) {
@@ -49,12 +56,18 @@
 
         /* minimum length of github username is 4 */
         if (input.value.length > 4) {
+            
             clearTimeout(typingTimer);
+            
             typingTimer = setTimeout(function() {
+                
                 while(autoMenu.firstChild) {
                     autoMenu.removeChild(autoMenu.firstChild);                        
-                }                
-                keyupService(input.value)
+                }
+                
+                input.style.background = "url('loader.gif') no-repeat right center";
+                
+                keyupService(input.value);
             }, doneTypingInterval);
         }
     }
@@ -67,6 +80,7 @@
      * 
      */
     function keyupService(userName) {
+        
         var xhr   = new XMLHttpRequest(),
             url   = `${baseUrl}/${userName}?${apikey}`;        
 
@@ -91,7 +105,9 @@
      * 
      */
     function onfocusHandler() {
+        
         input.style.background = "url('loader.gif') no-repeat right center";
+        
         defaultUsers.forEach(function(user) {
             /* restricting the construction of defaultuser after we got them */              
             if (autoMenu.childNodes.length < 3) {
@@ -111,6 +127,7 @@
      * 
      */
     function onfocusService(userName) {
+        
         var xhr   = new XMLHttpRequest(),
             url   = `${baseUrl}/${userName}?${apikey}`;
 
@@ -137,6 +154,7 @@
      * @return {[type]}
      */
     function constructUser(user, eventName) {
+        
         var dataset         = document.createElement('div'),
             userMenu        = document.createElement('div'),
             profileCard     = document.createElement('div'),
