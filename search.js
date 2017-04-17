@@ -1,3 +1,9 @@
+/**
+* Author MadhankumarJ<madhankumar028@gmail.com>
+*
+* Github-search Tribute to Github
+* Inspired by typeahead.js and developed
+*/
 (function() {
 
     'use strict';
@@ -5,34 +11,28 @@
     var input               = document.getElementById('search'),
         autoMenu            = document.getElementById('autocomplete-menu'),
         loader              = document.getElementsByClassName('loader'),
-        defaultUsers        = ['getify', 'vasanthk', 'toddmotto', 'madhankumar028'],
-        doneTypingInterval  = 5000,  //time in ms, 5 second for example
-        memoize             = [];
-    
-    const baseUrl = 'https://api.github.com/users';
+        doneTypingInterval  = 5000;  //time in ms, 5 second for example
+
+    const client_id     = 'b7641fc061fbc7eba0ae',
+          defaultUsers  = ['getify', 'vasanthk', 'toddmotto', 'madhankumar028'],        
+          client_secret = '582f452b977885775b36fd81d8bfe51a5d48e59d',
+          apikey        = `client_id="${client_id}&client_secret="${client_secret}"`,
+          baseUrl       = 'https://api.github.com/users';
     
     /* EventListener for input element (onfocus event) */
     input.addEventListener('focus', onfocusHandler);
     
     /* EventListener for input element (focusout event) */
     input.addEventListener('focusout', function() {
-
         autoMenu.style.visibility = 'hidden';
-        
-        /*while(autoMenu.firstChild) {
-            autoMenu.removeChild(autoMenu.firstChild);
-        }*/
     });
     
     /* EventListener for input element (keyup event) */
     input.addEventListener('keyup', keyupHandler);
-
-    // autoMenu.style.visibility = 'visible';
-    
-    /* loader.style.visibility = 'hidden'; */
     
     /**
-     *
+     * Handler for keyup event
+     * 
      * @public
      * @param  {Event} event
      *
@@ -62,13 +62,11 @@
      * 
      */
     function keyupService(userName) {
-
         var xhr   = new XMLHttpRequest(),
-            url   = `${baseUrl}/${userName}`;
+            url   = `${baseUrl}/${userName}?${apikey}`;        
 
         xhr.onreadystatechange = function() {            
-            if (xhr.readyState == XMLHttpRequest.DONE) {
-                
+            if (xhr.readyState == XMLHttpRequest.DONE) {                
                 var user = JSON.parse(xhr.responseText),
                     isUser = user.message || user;                    
 
@@ -88,7 +86,6 @@
      * 
      */
     function onfocusHandler() {
-
         defaultUsers.forEach(function(user) {
             /* restricting the construction of defaultuser after we got them */              
             if (autoMenu.childNodes.length < 3) {
@@ -107,19 +104,13 @@
      * 
      */
     function onfocusService(userName) {
-
         var xhr   = new XMLHttpRequest(),
             url   = `${baseUrl}/${userName}`;
 
-        // loader.style.visibility = 'visible';
-
         xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE) {
-
                 var user = JSON.parse(xhr.responseText),
-                    isUser = user.message || user;
-                
-                memoize.push(user);
+                    isUser = user.message || user;                
 
                 if (isUser !== 'Not Found')                        
                     constructUser(user, 'onfocus');                
@@ -139,7 +130,6 @@
      * @return {[type]}
      */
     function constructUser(user, eventName) {
-
         var dataset         = document.createElement('div'),
             userMenu        = document.createElement('div'),
             profileCard     = document.createElement('div'),
@@ -171,11 +161,8 @@
         bio.className               = 'bio';
         repo.className              = 'repo';
         following.className         = 'following';
-        followers.className         = 'followers';
+        followers.className         = 'followers';                
 
-        if (eventName === 'keyup')
-            console.log(eventName);
-        
         if (user.bio == null) {
             info = document.createTextNode(`${user.login} has not descried anything about him.`);
         } else {
@@ -246,15 +233,5 @@
         userMenu.appendChild(profileCard);
         dataset.appendChild(userMenu);
         autoMenu.appendChild(dataset);
-        
-        // loader.style.visibility = 'hidden';
     }
-
-    function init() {
-        // loader.style.visibility = 'hidden';        
-        console.log(window.indexedDB);        
-    }
-
-    init();
-
 }());
