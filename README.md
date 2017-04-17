@@ -13,8 +13,9 @@ npm run dev
 Contribution
 ----------------------------------
 Contributions are welcome. But maintain the consistency. If you are interested to improve the existing code base, give me a PR.
+You can also share your feedback and suggestions to improve the app. Shoot me @ :email: madhankumar028@gmail.com.
 
 Show your interest by clicking :star:
 
 ## Note
-It is in development phase. You the expect the release soon.
+It is in development phase. You the expect the beta release soon.
