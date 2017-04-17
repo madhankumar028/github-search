@@ -29,10 +29,7 @@ body {
     position: relative;
     color: #000;
     z-index: 10;
-    border: 8px solid darkgrey;
-}
-.loader {
-    background: url(loader.gif) no-repeat right center;
+    border: 8px solid darkgrey;    
 }
 #autocomplete-menu {
     margin-top: 0px;

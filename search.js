@@ -13,6 +13,8 @@
         loader              = document.getElementsByClassName('loader'),
         doneTypingInterval  = 5000;  //time in ms, 5 second for example
 
+    // input.style.backgroundImage  = 'none';
+
     const client_id     = 'b7641fc061fbc7eba0ae',
           defaultUsers  = ['getify', 'vasanthk', 'toddmotto', 'madhankumar028'],        
           client_secret = '582f452b977885775b36fd81d8bfe51a5d48e59d',
@@ -86,12 +88,14 @@
      * 
      */
     function onfocusHandler() {
+        input.style.background = "url('loader.gif') no-repeat right center";
         defaultUsers.forEach(function(user) {
             /* restricting the construction of defaultuser after we got them */              
             if (autoMenu.childNodes.length < 3) {
                 onfocusService(user);                
             } else {
                 autoMenu.style.visibility = 'visible';
+                input.style.backgroundImage = 'none';
             }
         });
     }
@@ -150,19 +154,8 @@
             followers       = document.createTextNode(`Followers: ${user.followers}`),
             info, userName;
         
-        img.className               = 'img-circle';
-        dataset.className           = 'data-set';
-        userMenu.className          = 'user-data';
-        profileDetails.className    = 'profile-details',
-        profileCard.className       = 'profile-card';
-        profileStatus.className     = 'profile-status';
-        name.className              = 'user-name';
-        mail.className              = 'mail';
-        bio.className               = 'bio';
-        repo.className              = 'repo';
-        following.className         = 'following';
-        followers.className         = 'followers';                
-
+        img.className = 'img-circle';
+        
         if (user.bio == null) {
             info = document.createTextNode(`${user.login} has not descried anything about him.`);
         } else {
@@ -233,5 +226,7 @@
         userMenu.appendChild(profileCard);
         dataset.appendChild(userMenu);
         autoMenu.appendChild(dataset);
+
+        input.style.backgroundImage = 'none';
     }
 }());
