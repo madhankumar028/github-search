@@ -2,22 +2,19 @@
 
 ### autocomplete.js
 
-Tribute to Github.
+Tribute to Github. Inspired by typeahead.js for twitter.
 
-## Bootstrap the app
+## Bootstrap the app Locally
 ```
 npm install
 npm run dev
 ```
 
-
-
-
 Contributing
 ----------------------------------
+Contributions are welcome. But maintain the consistency. If you are interested to improve the existing code base, give me a PR.
 
-I'm still learning from this. For the moment, please restrict your contributions to fixing possible bugs
-or improving existing documents. I'm not yet ready to accept enhancements.
+Show your interest by clicking :star:
 
 ## Note
-It is in development phase.
+It is in development phase. You the expect the release soon.
