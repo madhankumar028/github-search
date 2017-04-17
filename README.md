@@ -10,7 +10,7 @@ npm install
 npm run dev
 ```
 
-Contributing
+Contribution
 ----------------------------------
 Contributions are welcome. But maintain the consistency. If you are interested to improve the existing code base, give me a PR.
 
