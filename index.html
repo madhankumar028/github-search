@@ -4,36 +4,40 @@
     <title>autocomplete.js</title>
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">    
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="assets/main.css">
 </head>
 <body>
     <!-- container -->
-    <div class="container">
-        <!-- main -->
+    <div class="container">        
         <div class="main">
             <div class="title">
                 <i class="fa fa-github"></i>
-                <span class="title">Github autocomplete.js</span>
+                <span class="title">Github search.js</span>
             </div>
+            <div class="description">
+                Tribute to Github. Inspired by twitter's typeahead.js.
+            </div>            
+            <!--<div class="project text-center">
+                <a href="https://github.com/madhankumar028/github-search" target="_blank">
+                    project &amp docs on github
+                </a>
+            </div>-->
             <div class="demo">
                 <div id="search-container">
                     <input name="searchField" id="search" type="text"
                         placeholder="Search Github users..."/>                    
                 </div>             
             </div>            
-        </div>
-        <!-- /main -->
-    </div>    
-    <!-- /container -->
+        </div>        
+    </div>     
     
     <!-- autocomplete-menu -->
-    <div id="autocomplete-menu"></div>            
-    <!-- /autocomplete-menu -->
+    <div id="autocomplete-menu"></div>
 
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     
-    <script src="search.js" type="text/javascript"></script>
+    <script src="search.js"></script>
 
 </body>
 </html>

@@ -2,7 +2,10 @@
     margin: 0px;
     padding: 0px;    
     letter-spacing: 1px;
-    font-family: sans-serif;
+    font-family: Helvetica;
+}
+html {
+    font-size: 16px;    
 }
 body {
     background-color: lightgray;
@@ -12,7 +15,12 @@ body {
 }
 .title {
     margin: 20px 0 0 0;
-    font-size: 64px;
+    font-size: 3rem;
+}
+.description {
+    font-size: 1rem;
+    margin-top: 25px;
+    font-weight: bold;
 }
 .demo {
     margin: 60px 0 0 0;
@@ -27,15 +35,21 @@ body {
 }
 #search {
     position: relative;
+    outline: none;
     color: #000;
     z-index: 10;
-    border: 8px solid darkgrey;    
+    border: 8px solid #757575;    
 }
 #autocomplete-menu {
     margin-top: 0px;
     text-align: center;
     padding: 0px 100px 0px 100px;
 }
-.title {
-    font-size: 40px;
+.project {
+    margin-top: 25px;    
+}
+a {
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;    
 }

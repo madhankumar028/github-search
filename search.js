@@ -11,7 +11,7 @@
     var input               = document.getElementById('search'),
         autoMenu            = document.getElementById('autocomplete-menu'),
         loader              = document.getElementsByClassName('loader'),
-        doneTypingInterval  = 3000;  //time in ms, 3 seconds for example    
+        doneTypingInterval  = 3000;  //time in ms, 3seconds for example    
 
     const defaultUsers  = ['getify', 'vasanthk', 'toddmotto', 'deedy'],        
           client_id     = 'b7641fc061fbc7eba0ae',          
@@ -25,6 +25,7 @@
     /* EventListener for input element (focusout event) */
     input.addEventListener('focusout', function() {
         autoMenu.style.visibility = 'hidden';
+        input.style.backgroundImage = 'none';        
     });
     
     /* EventListener for input element (keyup event) */
@@ -34,6 +35,7 @@
      * Handler for keyup event
      * 
      * @public
+     * 
      * @param  {Event} event
      *
      */
@@ -65,9 +67,9 @@
                     autoMenu.removeChild(autoMenu.firstChild);                        
                 }
                 
-                input.style.background = "url('loader.gif') no-repeat right center";
-                
-                keyupService(input.value);
+                input.style.background = "url('assets/loader.gif') no-repeat right center";
+                if (!autoMenu.firstChild)
+                    keyupService(input.value);
             }, doneTypingInterval);
         }
     }
@@ -76,6 +78,7 @@
      * Service for keyupHandler
      * 
      * @private
+     * 
      * @param  {String} username
      * 
      */
@@ -101,12 +104,18 @@
     /**
      *
      * Handler for onfocus event
+     * 
      * @public
      * 
      */
     function onfocusHandler() {
         
-        input.style.background = "url('loader.gif') no-repeat right center";
+        if (input.value.length) {
+            autoMenu.style.visibility = 'visible';
+            return;            
+        }
+        
+        input.style.background = "url('assets/loader.gif') no-repeat right center";
         
         defaultUsers.forEach(function(user) {
             /* restricting the construction of defaultuser after we got them */              
@@ -122,7 +131,9 @@
     /**
      *
      * Service for onfocus event
+     * 
      * @private
+     * 
      * @param  {String} username
      * 
      */
@@ -147,9 +158,10 @@
 
     /**
      *
-     * onfocus event user constructor
+     * Construction of user in DOM
      * 
      * @pirvate
+     * 
      * @param  {Object} user
      * @return {[type]}
      */
