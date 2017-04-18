@@ -58,9 +58,9 @@ body {
     left: -75px;
     box-sizing: border-box;
 }
-.profile-card:hover {
+/*.profile-card:hover {
     background-color: #757575;
-}
+}*/
 #autocomplete-menu {
     margin-top: 0px;
     text-align: center;
