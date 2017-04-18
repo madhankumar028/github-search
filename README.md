@@ -17,5 +17,4 @@ You can also share your feedback and suggestions to improve the app. Shoot me @ 
 
 Show your interest by clicking :star:
 
-## Note
-It is in development phase. You the expect the beta release soon.
+Beta version has been released. Check out the [Live Demo](https://madhankumar028.github.io/github-search/)
