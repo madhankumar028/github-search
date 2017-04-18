@@ -57,7 +57,7 @@
         }
 
         /* minimum length of github username is 4 */
-        if (input.value.length > 4) {
+        if (input.value.length >= 3) {
             
             clearTimeout(typingTimer);
             
@@ -191,7 +191,7 @@
             followers       = document.createTextNode(`Followers: ${user.followers}`),
             info, userName;
         
-        img.className = 'img-circle';
+        img.className = 'img-circle';        
         
         if (user.bio == null) {
             info = document.createTextNode(`${user.login} has not descried anything about him.`);
@@ -211,7 +211,7 @@
                 
         img.style.width = '50px';
         img.style.position = 'relative';
-        img.style.right = '200px';
+        img.style.right = '250px';
         img.style.margin = '20px 0px 0px 0px';
         
         dataset.style.margin    = '0px';
@@ -237,6 +237,9 @@
         followersSpan.style.fontWeight   = '500';
 
         profileCard.style.paddingLeft = '50px';
+        profileCard.style.width = '500px';
+        profileCard.style.position = 'relative';
+        profileCard.style.left = '-75px';
         profileCard.style.boxSizing = 'border-box';
 
         profileDetails.style.position = 'relative';
