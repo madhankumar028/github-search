@@ -40,7 +40,7 @@
      *
      */
     function keyupHandler(event) {
-        
+                
         var typingTimer = null;       
         
         autoMenu.style.visibility = 'hidden';
@@ -53,7 +53,7 @@
         /* showing the default users, when there is no keypress */
         if (input.value.length == 0) {
             autoMenu.style.visibility = 'visible';        
-            return;            
+            return;           
         }
 
         /* minimum length of github username is 4 */
@@ -61,12 +61,11 @@
             
             clearTimeout(typingTimer);
             
-            typingTimer = setTimeout(function() {
+            typingTimer = setTimeout(function() {                
                 
                 while(autoMenu.firstChild) {
                     autoMenu.removeChild(autoMenu.firstChild);                        
-                }
-                
+                }                
                 input.style.background = "url('assets/loader.gif') no-repeat right center";
                 if (!autoMenu.firstChild)
                     keyupService(input.value);
@@ -108,13 +107,18 @@
      * @public
      * 
      */
-    function onfocusHandler() {
+    function onfocusHandler() {        
         
         if (input.value.length) {
-            autoMenu.style.visibility = 'visible';
+            autoMenu.style.visibility = 'visible';            
             return;            
         }
         
+        /* Removes the first child, if it goes more than 4 default users */
+        if (autoMenu.childNodes.length > 4) {
+            autoMenu.removeChild(autoMenu.firstChild);
+        }
+                
         input.style.background = "url('assets/loader.gif') no-repeat right center";
         
         defaultUsers.forEach(function(user) {

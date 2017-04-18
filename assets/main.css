@@ -10,6 +10,17 @@ html {
 body {
     background-color: lightgray;
 }
+.corner-ribbon {
+    position: absolute;
+    left: -60px;
+    top: 50px;
+    width: 250px;
+    text-align: center;
+    background: #757575;
+    color: #f0f0f0;
+    transform: rotate(-45deg);
+    box-shadow: 0 0 3px rgba(0,0,0,.3);
+}
 .main {
     text-align: center;
 }
@@ -49,7 +60,6 @@ body {
     margin-top: 25px;    
 }
 a {
-    color: #000;
-    font-weight: bold;
+    color: #757575;    
     text-decoration: none;    
 }

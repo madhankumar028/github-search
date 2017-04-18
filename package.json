@@ -16,6 +16,9 @@
   "bugs": {
     "url": "https://github.com/madhankumar028/github-search/issues"
   },
+  "engines": {
+    "node": "6.2.0"
+  },
   "homepage": "https://github.com/madhankumar028/github-search#readme",
   "devDependencies": {
     "lite-server": "^2.2.2"
