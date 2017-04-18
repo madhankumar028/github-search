@@ -51,10 +51,59 @@ body {
     z-index: 10;
     border: 8px solid #757575;    
 }
+.profile-card {
+    padding-left: 50px;
+    width: 500px;
+    position: relative;
+    left: -75px;
+    box-sizing: border-box;
+}
+.profile-card:hover {
+    background-color: #757575;
+}
 #autocomplete-menu {
     margin-top: 0px;
     text-align: center;
     padding: 0px 100px 0px 100px;
+    box-sizing: border-box;
+}
+.img-circle {
+    position: relative;
+    width: 50px;
+    right: 250px;
+    margin-top: 20px; 
+}
+.dataset {
+    margin: opx;
+    padding: 0px 400px;
+}
+.user-menu {
+    margin-right: 50px;
+}
+.name {
+    font-weight: bold;
+    font-size: 14px;
+}
+.bio {
+    font-size: 16px;
+}
+.repo {
+    margin-right: 10px;
+    color: #8899a6;
+    font-weight: 500px;
+}
+.followers {
+    font-weight: 10px;
+    color: #8899a6;
+}
+.following {
+    margin-right: 10px;
+    color: #8899a6;
+    font-weight: 500px;
+}
+.profile-details {
+    position: relative;
+    margin-top: -55px; 
 }
 .project {
     margin-top: 25px;    
