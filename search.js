@@ -57,7 +57,7 @@
         }
 
         /* minimum length of github username is 4 */
-        if (input.value.length > 4) {
+        if (input.value.length >= 3) {
             
             clearTimeout(typingTimer);
             
@@ -92,7 +92,7 @@
                     isUser = user.message || user;                    
 
                 if (isUser !== 'Not Found')                   
-                    constructUser(user, 'keyup');
+                    constructUser(user);
             }
         }
 
@@ -152,7 +152,7 @@
                     isUser = user.message || user;                
 
                 if (isUser !== 'Not Found')                        
-                    constructUser(user, 'onfocus');                
+                    constructUser(user);                
             }
         }
 
@@ -167,9 +167,8 @@
      * @pirvate
      * 
      * @param  {Object} user
-     * @return {[type]}
      */
-    function constructUser(user, eventName) {
+    function constructUser(user) {
         
         var dataset         = document.createElement('div'),
             userMenu        = document.createElement('div'),
@@ -192,7 +191,16 @@
             info, userName;
         
         img.className = 'img-circle';
-        
+        profileCard.className = 'profile-card';
+        dataset.className = 'dataset';
+        userMenu.className = 'user-menu';
+        name.className = 'name';
+        bio.className = 'bio';
+        repoSpan.className = 'repo';
+        followersSpan.className = 'followers';
+        followingSpan.className = 'following';
+        profileDetails.className = 'profile-details';
+
         if (user.bio == null) {
             info = document.createTextNode(`${user.login} has not descried anything about him.`);
         } else {
@@ -206,41 +214,6 @@
         }
         
         img.setAttribute('src', user.avatar_url);
-
-        autoMenu.style.boxSizing = 'border-box';
-                
-        img.style.width = '50px';
-        img.style.position = 'relative';
-        img.style.right = '200px';
-        img.style.margin = '20px 0px 0px 0px';
-        
-        dataset.style.margin    = '0px';
-        dataset.style.padding   = '0px 400px';
-
-        userMenu.style.marginRight = '50px';
-
-        name.style.fontWeight = 'bold';
-        name.style.fontSize = '14px';
-
-        bio.style.fontSize = '16px'
-
-        repoSpan.style.marginRight  = '10px';
-        repoSpan.style.color        = '#8899a6';
-        repoSpan.style.fontWeight   = '500';        
-
-        followingSpan.style.marginRight = '10px';
-        followingSpan.style.color       = '#8899a6';        
-        followingSpan.style.fontWeight  = '500';
-
-        followersSpan.style.fontWeight   = '10px';        
-        followersSpan.style.color        = '#8899a6';        
-        followersSpan.style.fontWeight   = '500';
-
-        profileCard.style.paddingLeft = '50px';
-        profileCard.style.boxSizing = 'border-box';
-
-        profileDetails.style.position = 'relative';
-        profileDetails.style.margin = '-55px 0px 0px 0px';
 
         name.appendChild(userName);
         bio.appendChild(info);
