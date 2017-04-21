@@ -17,4 +17,4 @@ You can also share your feedback and suggestions to improve the app. Shoot me @ 
 
 Show your interest by clicking :star:
 
-Beta version has been released for desktop version. Check out the [Live Demo](https://madhankumar028.github.io/github-search/)
+I have released beta version for desktop version. Check out the [Demo](https://madhankumar028.github.io/github-search/)
