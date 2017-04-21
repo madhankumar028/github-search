@@ -19,18 +19,18 @@
           apikey        = `client_id="${client_id}&client_secret="${client_secret}"`,
           baseUrl       = 'https://api.github.com/users';
     
-    /* EventListener for input element (onfocus event) */
+    /** EventListener for input element (onfocus event) */
     input.addEventListener('focus', onfocusHandler);
     
-    /* EventListener for input element (focusout event) */
+    /** EventListener for input element (focusout event) */
     input.addEventListener('focusout', function() {
         autoMenu.style.visibility = 'hidden';
         input.style.backgroundImage = 'none';        
     });
     
-    /* EventListener for input element (keyup event) */
-    input.addEventListener('keyup', keyupHandler);
-    
+    /** EventListener for input element (keyup event) */
+    input.addEventListener('keyup', keyupHandler);    
+
     /**
      * Handler for keyup event
      * 
@@ -48,27 +48,32 @@
         if (event.which === 46) {
             autoMenu.style.visibility = 'visible';            
             return;            
-        }
+        }        
         
-        /* showing the default users, when there is no keypress */
+        /** showing the default users, when there is no keypress */
         if (input.value.length == 0) {
             autoMenu.style.visibility = 'visible';        
             return;           
         }
 
-        /* minimum length of github username is 4 */
+        /** minimum length of github username is 4 */
         if (input.value.length >= 3) {
             
             clearTimeout(typingTimer);
             
-            typingTimer = setTimeout(function() {                
-                
+            typingTimer = setTimeout(function() {                                
                 while(autoMenu.firstChild) {
                     autoMenu.removeChild(autoMenu.firstChild);                        
                 }                
                 input.style.background = "url('assets/loader.gif') no-repeat right center";
-                if (!autoMenu.firstChild)
+                
+                if (event.which === 13) {
+                    window.open(`https://github.com/${input.value}`);
+                }
+
+                if (!autoMenu.firstChild) {
                     keyupService(input.value);
+                }
             }, doneTypingInterval);
         }
     }
@@ -114,22 +119,22 @@
             return;            
         }
         
-        /* Removes the first child, if it goes more than 4 default users */
+        /** Removes the first child, if it goes more than 4 default users */
         if (autoMenu.childNodes.length > 4) {
             autoMenu.removeChild(autoMenu.firstChild);
-        }
-                
+        }       
+
         input.style.background = "url('assets/loader.gif') no-repeat right center";
         
         defaultUsers.forEach(function(user) {
-            /* restricting the construction of defaultuser after we got them */              
+            /** restricting the construction of defaultuser after we got them */              
             if (autoMenu.childNodes.length < 3) {
                 onfocusService(user);                
             } else {
                 autoMenu.style.visibility = 'visible';
                 input.style.backgroundImage = 'none';
             }
-        });
+        });        
     }
 
     /**
@@ -202,7 +207,7 @@
         profileDetails.className = 'profile-details';
 
         if (user.bio == null) {
-            info = document.createTextNode(`${user.login} has not descried anything about him.`);
+            info = document.createTextNode(`${user.login} has not described anything about him.`);
         } else {
             info = document.createTextNode(`${user.bio}`);            
         }
@@ -240,5 +245,9 @@
         input.style.backgroundImage = 'none';
 
         autoMenu.style.visibility = 'visible';                
+    }
+
+    function onUserClick(element) {
+        console.log(element);
     }
 }());
