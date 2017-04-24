@@ -175,72 +175,29 @@
      */
     function constructUser(user) {
         
-        var dataset         = document.createElement('div'),
-            userMenu        = document.createElement('div'),
-            profileCard     = document.createElement('div'),
-            profileDetails  = document.createElement('div'),
-            profileStatus   = document.createElement('div'),
-            img             = document.createElement('img'),
-            name            = document.createElement('div'),
-            mail            = document.createElement('div'),
-            bio             = document.createElement('div'),
-            repo            = document.createElement('div'),
-            followers       = document.createElement('div'),
-            following       = document.createElement('div'),
-            repoSpan        = document.createElement('span'),
-            followersSpan   = document.createElement('span'),
-            followingSpan   = document.createElement('span'),        
-            repo            = document.createTextNode(`Repo: ${user.public_repos}`),
-            following       = document.createTextNode(`Following: ${user.following}`),
-            followers       = document.createTextNode(`Followers: ${user.followers}`),
-            info, userName;
+        var template,
+            templateScript,
+            html;
+
+        // if (user.bio == null) {
+        //     info = document.createTextNode(`${user.login} has not described anything about him.`);
+        // } else {
+        //     info = document.createTextNode(`${user.bio}`);            
+        // }
+
+        // if (user.name == null) {
+        //     userName = document.createTextNode(`${user.login}`);  
+        // } else {
+        //     userName = document.createTextNode(`${user.name}`);            
+        // }        
+
+        template = document.getElementById('template').innerHTML;
         
-        img.className = 'img-circle';
-        profileCard.className = 'profile-card';
-        dataset.className = 'dataset';
-        userMenu.className = 'user-menu';
-        name.className = 'name';
-        bio.className = 'bio';
-        repoSpan.className = 'repo';
-        followersSpan.className = 'followers';
-        followingSpan.className = 'following';
-        profileDetails.className = 'profile-details';
-
-        if (user.bio == null) {
-            info = document.createTextNode(`${user.login} has not described anything about him.`);
-        } else {
-            info = document.createTextNode(`${user.bio}`);            
-        }
-
-        if (user.name == null) {
-            userName = document.createTextNode(`${user.login}`);  
-        } else {
-            userName = document.createTextNode(`${user.name}`);            
-        }
+        templateScript = Handlebars.compile(template);
         
-        img.setAttribute('src', user.avatar_url);
+        html = templateScript(user);
 
-        name.appendChild(userName);
-        bio.appendChild(info);
-
-        profileDetails.appendChild(name);
-        profileDetails.appendChild(bio);
-
-        repoSpan.appendChild(repo);
-        followingSpan.appendChild(following);
-        followersSpan.appendChild(followers);
-
-        profileStatus.appendChild(repoSpan);
-        profileStatus.appendChild(followingSpan);
-        profileStatus.appendChild(followersSpan);        
-
-        profileCard.appendChild(img);
-        profileCard.appendChild(profileDetails);
-        profileCard.appendChild(profileStatus);
-
-        userMenu.appendChild(profileCard);
-        dataset.appendChild(userMenu);
-        autoMenu.appendChild(dataset);
+        autoMenu.innerHTML = html;
 
         input.style.backgroundImage = 'none';
 
