@@ -73,9 +73,9 @@ body {
     right: 250px;
     margin-top: 20px; 
 }
-.dataset {
-    margin: opx;
+.dataset {    
     padding: 0px 400px;
+    margin-bottom: 0px;
 }
 .user-menu {
     margin-right: 50px;
@@ -101,9 +101,9 @@ body {
     color: #8899a6;
     font-weight: 500px;
 }
-.profile-details {
+.details {
     position: relative;
-    margin-top: -55px; 
+    top: -70px; 
 }
 .project {
     margin-top: 25px;    

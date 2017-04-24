@@ -57,7 +57,7 @@
             return;           
         }
 
-        /** minimum length of github username is 4 */
+        /** minimum length of github username is 3 */
         if (input.value.length >= 3) {
             
             clearTimeout(typingTimer);
@@ -157,10 +157,13 @@
                 var user = JSON.parse(xhr.responseText),
                     isUser = user.message || user;                
 
-                if (isUser !== 'Not Found') memoize.users.push(user);
-                if (memoize.users.length) constructUser(memoize);
+                if (isUser !== 'Not Found') {
+                    memoize.users.push(user);
+                }
 
-                console.log(memoize.users);
+                if (memoize.users.length) {
+                    constructUser(memoize);
+                }
             }
         }
 
@@ -174,21 +177,18 @@
      * 
      * @pirvate
      * 
-     * @param  {Object} user
+     * @param  {Object} memoize
      */
     function constructUser(memoize) {
         
         var template,
-            templateScript,
-            html;
+            templateScript;
 
         template = document.getElementById('template').innerHTML;
         
         templateScript = Handlebars.compile(template);
         
-        html = templateScript(memoize);
-
-        autoMenu.innerHTML = html;
+        autoMenu.innerHTML = templateScript(memoize);
 
         input.style.backgroundImage = 'none';
 

@@ -38,27 +38,29 @@
     <!-- autocomplete-menu -->
     <div id="autocomplete-menu"></div>
 
-    <script id="template" type="text/x-handlebars-template">
-        <div>
-            {{#users}}
-            <div class="dataset">
-                <div class="userMenu">
-                    <div class="profile-card">
-                        <img class="img-circle" src={{avatar_url}}>
-                        <div class="profile-details">
-                            <h3 class="name">{{name}}</h3>
+    <script id="template" type="text/x-handlebars-template">        
+        {{#users}}
+        <div class="dataset">
+            <div class="userMenu">
+                <div class="profile-card">
+                    <img class="img-circle" src={{avatar_url}}>
+                    <div class=" details">
+                        <h3 class="name">{{name}}</h3>
+                        {{#if bio}}
                             <p class="bio">{{bio}}</p>
-                        </div>
-                        <div class="info">
-                            <span class="repo">Repo:{{public_repos}}</span>
-                            <span class="repo">Following:{{following}}</span>
-                            <span class="repo">Followers:{{followers}}</span>
-                        </div>
+                            {{else}}
+                                <p class="bio">{{name}} has not described anything about him</p>                                
+                        {{/if}}
+                    </div>
+                    <div class="details">
+                        <span class="repo">Repo:{{public_repos}}</span>
+                        <span class="repo">Following:{{following}}</span>
+                        <span class="repo">Followers:{{followers}}</span>
                     </div>
                 </div>
             </div>
-            {{/users}}
         </div>
+        {{/users}}
     </script>
     
     <!-- Script loading -->
