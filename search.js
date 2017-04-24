@@ -179,18 +179,6 @@
             templateScript,
             html;
 
-        // if (user.bio == null) {
-        //     info = document.createTextNode(`${user.login} has not described anything about him.`);
-        // } else {
-        //     info = document.createTextNode(`${user.bio}`);            
-        // }
-
-        // if (user.name == null) {
-        //     userName = document.createTextNode(`${user.login}`);  
-        // } else {
-        //     userName = document.createTextNode(`${user.name}`);            
-        // }        
-
         template = document.getElementById('template').innerHTML;
         
         templateScript = Handlebars.compile(template);
