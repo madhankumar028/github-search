@@ -11,7 +11,8 @@
     var input               = document.getElementById('search'),
         autoMenu            = document.getElementById('autocomplete-menu'),
         loader              = document.getElementsByClassName('loader'),
-        doneTypingInterval  = 3000;  //time in ms, 3seconds for example    
+        doneTypingInterval  = 3000,  //time in ms, 3seconds for example    
+        memoize             = {users: []};
 
     const defaultUsers  = ['getify', 'vasanthk', 'toddmotto', 'deedy'],        
           client_id     = 'b7641fc061fbc7eba0ae',          
@@ -156,8 +157,10 @@
                 var user = JSON.parse(xhr.responseText),
                     isUser = user.message || user;                
 
-                if (isUser !== 'Not Found')                        
-                    constructUser(user);                
+                if (isUser !== 'Not Found') memoize.users.push(user);
+                if (memoize.users.length) constructUser(memoize);
+
+                console.log(memoize.users);
             }
         }
 
@@ -173,7 +176,7 @@
      * 
      * @param  {Object} user
      */
-    function constructUser(user) {
+    function constructUser(memoize) {
         
         var template,
             templateScript,
@@ -183,16 +186,12 @@
         
         templateScript = Handlebars.compile(template);
         
-        html = templateScript(user);
+        html = templateScript(memoize);
 
         autoMenu.innerHTML = html;
 
         input.style.backgroundImage = 'none';
 
         autoMenu.style.visibility = 'visible';                
-    }
-
-    function onUserClick(element) {
-        console.log(element);
     }
 }());

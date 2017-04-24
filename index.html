@@ -39,21 +39,25 @@
     <div id="autocomplete-menu"></div>
 
     <script id="template" type="text/x-handlebars-template">
-        <div class="dataset">
-            <div class="userMenu">
-                <div class="profile-card">
-                    <img class="img-circle" src={{avatar_url}}>
-                    <div class="profile-details">
-                        <h3 class="name">{{name}}</h3>
-                        <p class="bio">{{bio}}</p>
-                    </div>
-                    <div class="info">
-                        <span class="repo">Repo:{{public_repos}}</span>
-                        <span class="repo">Following:{{following}}</span>
-                        <span class="repo">Followers:{{followers}}</span>
+        <div>
+            {{#users}}
+            <div class="dataset">
+                <div class="userMenu">
+                    <div class="profile-card">
+                        <img class="img-circle" src={{avatar_url}}>
+                        <div class="profile-details">
+                            <h3 class="name">{{name}}</h3>
+                            <p class="bio">{{bio}}</p>
+                        </div>
+                        <div class="info">
+                            <span class="repo">Repo:{{public_repos}}</span>
+                            <span class="repo">Following:{{following}}</span>
+                            <span class="repo">Followers:{{followers}}</span>
+                        </div>
                     </div>
                 </div>
             </div>
+            {{/users}}
         </div>
     </script>
     
