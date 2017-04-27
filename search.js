@@ -20,18 +20,6 @@
           apikey        = `client_id="${client_id}&client_secret="${client_secret}"`,
           baseUrl       = 'https://api.github.com/users';
     
-    /** EventListener for input element (onfocus event) */
-    input.addEventListener('focus', onfocusHandler);
-    
-    /** EventListener for input element (focusout event) */
-    input.addEventListener('focusout', function() {
-        autoMenu.style.visibility = 'hidden';
-        input.style.backgroundImage = 'none';        
-    });
-    
-    /** EventListener for input element (keyup event) */
-    input.addEventListener('keyup', keyupHandler);    
-
     /**
      * Handler for keyup event
      * 
@@ -194,4 +182,20 @@
 
         autoMenu.style.visibility = 'visible';                
     }
+
+    function init() {
+        /** EventListener for input element (onfocus event) */
+        input.addEventListener('focus', onfocusHandler);
+        
+        /** EventListener for input element (focusout event) */
+        input.addEventListener('focusout', function() {
+            autoMenu.style.visibility = 'hidden';
+            input.style.backgroundImage = 'none';        
+        });
+        
+        /** EventListener for input element (keyup event) */
+        input.addEventListener('keyup', keyupHandler);
+    }
+
+    init();
 }());
