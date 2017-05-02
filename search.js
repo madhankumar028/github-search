@@ -19,7 +19,21 @@
           client_secret = '582f452b977885775b36fd81d8bfe51a5d48e59d',
           apikey        = `client_id="${client_id}&client_secret="${client_secret}"`,
           baseUrl       = 'https://api.github.com/users';
-    
+
+    /** Service worker registration */
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker
+                .register('/sw.js')
+                .then(function(reg) {
+                    console.log('registered', reg);
+                },function(err) {
+                console.log('Service worker is not registered');
+                });
+        });
+    }
+
+
     /**
      * Handler for keyup event
      * 
