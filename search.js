@@ -132,7 +132,7 @@
         defaultUsers.forEach(function(user) {
             /** restricting the construction of defaultuser after we got them */              
             if (autoMenu.childNodes.length < 3) {
-                onfocusService(user);                
+                onfocusService(user);                              
             } else {
                 autoMenu.style.visibility = 'visible';
                 input.style.backgroundImage = 'none';
@@ -171,6 +171,18 @@
 
         xhr.open('GET', url, true);
         xhr.send();
+    }
+
+    function getUser(userName) {
+
+        let url   = `${baseUrl}/${userName}?${apikey}`;
+
+        fetch(url)
+        .then(function(res) {
+            console.log(res.json());
+        }).then(function(data) {
+            console.log(data);
+        });
     }
 
     /**
