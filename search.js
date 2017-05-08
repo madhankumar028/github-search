@@ -22,12 +22,12 @@
 
     /** Service worker registration */
     if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
+        window.addEventListener('load', () => {
             navigator.serviceWorker
                 .register('/sw.js')
-                .then(function(reg) {
+                .then( (reg) => {
                     console.log('Service worker is registered');
-                },function(err) {
+                }, (err) => {
                     console.log('Service worker is not registered');
                 });
         });
@@ -53,7 +53,7 @@
             return;            
         }        
         
-        /** showing the default users, when there is no keypress */
+        /** showing the default users, when there is no keypresponses */
         if (input.value.length == 0) {
             autoMenu.style.visibility = 'visible';        
             return;           
@@ -64,7 +64,7 @@
             
             clearTimeout(typingTimer);
             
-            typingTimer = setTimeout(function() {                                
+            typingTimer = setTimeout( () => {                                
                 while(autoMenu.firstChild) {
                     autoMenu.removeChild(autoMenu.firstChild);                        
                 }                
@@ -96,7 +96,7 @@
 
         xhr.onreadystatechange = function() {            
             if (xhr.readyState == XMLHttpRequest.DONE) {                
-                var user = JSON.parse(xhr.responseText),
+                var user = JSON.parse(xhr.responseponseText),
                     isUser = user.message || user;                    
 
                 if (isUser !== 'Not Found')                   
@@ -129,8 +129,8 @@
 
         input.style.background = "url('assets/loader.gif') no-repeat right center";
         
-        defaultUsers.forEach(function(user) {
-            /** restricting the construction of defaultuser after we got them */              
+        defaultUsers.forEach( (user) => {
+            /** responsetricting the construction of defaultuser after we got them */              
             if (autoMenu.childNodes.length < 3) {
                 // onfocusService(user);
                 getUser(user);                              
@@ -157,7 +157,7 @@
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE) {
-                var user = JSON.parse(xhr.responseText),
+                var user = JSON.parse(xhr.responseponseText),
                     isUser = user.message || user;                
 
                 if (isUser !== 'Not Found') {
@@ -175,15 +175,12 @@
     }
 
     function getUser(userName) {
-
         let url   = `${baseUrl}/${userName}?${apikey}`;
 
         fetch(url)
-        .then(function(res) {
-            console.log(res.json());
-        }).then(function(body) {
-            console.log(body);
-        });
+        .then(response => response.json())
+        .then(data => data)
+        .then(value => console.log(value));
     }
 
     /**
@@ -215,7 +212,7 @@
         input.addEventListener('focus', onfocusHandler);
         
         /** EventListener for input element (focusout event) */
-        input.addEventListener('focusout', function() {
+        input.addEventListener('focusout', () => {
             autoMenu.style.visibility = 'hidden';
             input.style.backgroundImage = 'none';        
         });

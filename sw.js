@@ -26,7 +26,20 @@ this.addEventListener('fetch', (event) => {
                     console.log(cachedResponse);                    
                     return cachedResponse;
                 }
-                return fetch(event.request);
+                return fetch(event.request.clone())
+                        .then( (response) => {
+                            // Bad request
+                            if (response.status !== 200) {
+                                return 'bad request';
+                            }
+                            
+                            var responseToCache = response.clone();
+                            
+                            caches.open('github-search')
+                                .then( (cache) => 
+                                    (cache.put(event.request, responseToCache)));                                    
+                                return response;
+                        })
             })
     );
 });
