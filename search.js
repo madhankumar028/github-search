@@ -26,9 +26,9 @@
             navigator.serviceWorker
                 .register('/sw.js')
                 .then(function(reg) {
-                    console.log('registered', reg);
+                    console.log('Service worker is registered');
                 },function(err) {
-                console.log('Service worker is not registered');
+                    console.log('Service worker is not registered');
                 });
         });
     }
@@ -132,7 +132,8 @@
         defaultUsers.forEach(function(user) {
             /** restricting the construction of defaultuser after we got them */              
             if (autoMenu.childNodes.length < 3) {
-                onfocusService(user);                              
+                // onfocusService(user);
+                getUser(user);                              
             } else {
                 autoMenu.style.visibility = 'visible';
                 input.style.backgroundImage = 'none';
@@ -180,8 +181,8 @@
         fetch(url)
         .then(function(res) {
             console.log(res.json());
-        }).then(function(data) {
-            console.log(data);
+        }).then(function(body) {
+            console.log(body);
         });
     }
 
