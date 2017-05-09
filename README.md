@@ -19,4 +19,6 @@ Show your interest by clicking :star:
 
 I have released beta version for desktop version. Check out the [Demo](https://madhankumar028.github.io/github-search/)
 
-New features in [feature](feature.md)
+Development
+------------
+You can checkout the new release features [here](features.md)
