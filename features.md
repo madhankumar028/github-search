@@ -3,14 +3,14 @@
 Got more suggestions and feedbacks after the beta release.
 
 Working on new features like :
-1. Converting DOM Manipulation by using Template engine.
-2. Including service worker to work this application works on offline mode.
-3. Converting XHR to fetch API
-4. Making the site responsive.
+1. Converting DOM Manipulation by using Template engine (Handlebars.js).
+2. Including serviceworker (making the app to work on offline mode) .
+3. Converting XHR(traditional) to fetch API.
+4. Making the app responsive.
 
 Development:
 -----------------
-Already these features are started and I am working on it @feature branch.
+I am started implementing these features @feature branch.
 
 Note:
 -----------------
