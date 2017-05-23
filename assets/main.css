@@ -1,6 +1,6 @@
 * {
-    margin: 0px;
-    padding: 0px;    
+    margin: 0;
+    padding: 0;    
     letter-spacing: 1px;
     font-family: Helvetica;
 }
@@ -62,9 +62,9 @@ body {
     background-color: #E0E0E0;
 }
 #autocomplete-menu {
-    margin-top: 0px;
+    margin-top: 0;
     text-align: center;
-    padding: 0px 100px 0px 100px;
+    padding: 0 100px 0 100px;
     box-sizing: border-box;
 }
 .img-circle {
@@ -74,8 +74,8 @@ body {
     margin-top: 20px; 
 }
 .dataset {    
-    padding: 0px 400px;
-    margin-bottom: 0px;
+    padding: 0 400px;
+    margin-bottom: 0;
 }
 .user-menu {
     margin-right: 50px;
