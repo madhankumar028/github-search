@@ -12,11 +12,12 @@ body {
 }
 .corner-ribbon {
     position: absolute;
+    padding-top: 3px;
     left: -60px;
     top: 50px;
     width: 250px;
     text-align: center;
-    background: #757575;
+    background: darkred;
     color: #f0f0f0;
     transform: rotate(-45deg);
     box-shadow: 0 0 3px rgba(0,0,0,.3);

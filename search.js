@@ -11,7 +11,7 @@
     var input               = document.getElementById('search'),
         autoMenu            = document.getElementById('autocomplete-menu'),
         loader              = document.getElementsByClassName('loader'),
-        doneTypingInterval  = 3000,  //time in ms, 3seconds for example    
+        doneTypingInterval  = 3000,  // time in ms, 3seconds for example    
         memoize             = {users: []};
 
     const defaultUsers  = ['getify', 'vasanthk', 'toddmotto', 'deedy'],        
@@ -20,7 +20,7 @@
           apikey        = `client_id="${client_id}&client_secret="${client_secret}"`,
           baseUrl       = 'https://api.github.com/users';
 
-    /** Service worker registration */
+    // Service worker registration
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             navigator.serviceWorker
@@ -91,16 +91,17 @@
      */
     function keyupService(userName) {
         
-        var xhr   = new XMLHttpRequest(),
+        let xhr   = new XMLHttpRequest(),
             url   = `${baseUrl}/${userName}?${apikey}`;        
 
         xhr.onreadystatechange = function() {            
             if (xhr.readyState == XMLHttpRequest.DONE) {                
-                var user = JSON.parse(xhr.responseponseText),
+                let user = JSON.parse(xhr.responseponseText),
                     isUser = user.message || user;                    
 
-                if (isUser !== 'Not Found')                   
-                    constructUser(user);
+                if (isUser !== 'Not Found') {
+                    constructUser(user);                    
+                }
             }
         }
 
@@ -152,12 +153,12 @@
      */
     function onfocusService(userName) {
         
-        var xhr   = new XMLHttpRequest(),
+        let xhr   = new XMLHttpRequest(),
             url   = `${baseUrl}/${userName}?${apikey}`;
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE) {
-                var user = JSON.parse(xhr.responseponseText),
+                let user = JSON.parse(xhr.responseponseText),
                     isUser = user.message || user;                
 
                 if (isUser !== 'Not Found') {
@@ -180,7 +181,7 @@
         fetch(url)
         .then(response => response.json())
         .then(data => data)
-        .then(value => console.log(value));
+        .then(user => constructUser(user));
     }
 
     /**
@@ -207,17 +208,21 @@
         autoMenu.style.visibility = 'visible';                
     }
 
-    function init() {
-        /** EventListener for input element (onfocus event) */
+    /**
+     * init function of the app
+     * 
+     * @private
+     *
+     * Adding event listener to input element
+     */
+    function init() {        
         input.addEventListener('focus', onfocusHandler);
-        
-        /** EventListener for input element (focusout event) */
+                
         input.addEventListener('focusout', () => {
             autoMenu.style.visibility = 'hidden';
             input.style.backgroundImage = 'none';        
         });
-        
-        /** EventListener for input element (keyup event) */
+                
         input.addEventListener('keyup', keyupHandler);
     }
 
