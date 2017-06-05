@@ -121,7 +121,7 @@
         fetch(url)
         .then(response => response.json())
         .then(data => data)
-        .then(value => constructUser(value));
+        .then(user => constructUser(user));
     }
 
     /**
@@ -157,7 +157,6 @@
             autoMenu.style.visibility = 'hidden';
             input.style.backgroundImage = 'none';
         });
-
         // EventListener for input element (keyup event)
         input.addEventListener('keyup', keyupHandler);
     }
