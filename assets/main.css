@@ -1,14 +1,14 @@
 * {
-    margin: 0px;
-    padding: 0px;    
+    margin: 0;
+    padding: 0;
     letter-spacing: 1px;
     font-family: Helvetica;
 }
 html {
-    font-size: 16px;    
+    font-size: 16px;
 }
 body {
-    background-color: lightgray;    
+    background-color: lightgray;
 }
 .corner-ribbon {
     position: absolute;
@@ -49,7 +49,7 @@ body {
     outline: none;
     color: #000;
     z-index: 10;
-    border: 8px solid #757575;    
+    border: 8px solid #757575;
 }
 .profile-card {
     padding-left: 50px;
@@ -62,20 +62,20 @@ body {
     background-color: #E0E0E0;
 }
 #autocomplete-menu {
-    margin-top: 0px;
+    margin-top: 0;
     text-align: center;
-    padding: 0px 100px 0px 100px;
+    padding: 0 100px 0 100px;
     box-sizing: border-box;
 }
 .img-circle {
     position: relative;
     width: 50px;
     right: 250px;
-    margin-top: 20px; 
+    margin-top: 20px;
 }
-.dataset {    
-    padding: 0px 400px;
-    margin-bottom: 0px;
+.dataset {
+    padding: 0 400px;
+    margin-bottom: 0;
 }
 .user-menu {
     margin-right: 50px;
@@ -103,21 +103,21 @@ body {
 }
 .details {
     position: relative;
-    top: -70px; 
+    top: -70px;
 }
 .project {
-    margin-top: 25px;    
+    margin-top: 25px;
 }
 a {
-    color: #757575;    
-    text-decoration: none;    
+    color: #757575;
+    text-decoration: none;
 }
 .btn {
     display: inline-block;
     margin-top: 150px;
     position: relative;
     left: 575px;
-    height: 50px;    
+    height: 50px;
     width: 150px;
     cursor: pointer;
     padding-top: 12px;
