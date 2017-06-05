@@ -1,5 +1,9 @@
 # Github-search
 
+<a href="https://codebeat.co/projects/github-com-madhankumar028-github-search-feature">
+  <img alt="codebeat badge" src="https://codebeat.co/badges/49590d7e-8bf4-4bc6-98fa-c1e791206e46" />
+</a>
+
 ### autocomplete.js
 
 Tribute to Github. Inspired by typeahead.js for twitter.
