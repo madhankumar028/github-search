@@ -6,9 +6,9 @@ Tribute to Github. Inspired by typeahead.js for twitter.
 
 ## Bootstrap the app Locally
 ```
-Clone the repository using git clone https://github.com/madhankumar028/github-search.git
-@project folder do npm install
-Once all the dependencies installed do npm run dev
+$ git clone https://github.com/madhankumar028/github-search.git && cd github-search
+$ npm install
+$ npm run dev
 ```
 
 Contributions
@@ -20,6 +20,6 @@ Show your interest by clicking :star:
 
 I have released beta version for desktop version. Check out the [Demo](https://madhankumar028.github.io/github-search/)
 
-Development
-------------
+Development (Goals)
+-------------------------
 You can checkout the new release features [here](features.md)
