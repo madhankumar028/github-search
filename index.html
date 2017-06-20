@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
-<head>    
+<head>
     <title>autocomplete.js</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">    
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/main.css">
 </head>
 <body>
-    
-    <!-- ribbon -->    
-    <h5 class="corner-ribbon">Tribute to Github</h4>    
+
+    <!-- ribbon -->
+    <h5 class="corner-ribbon">Tribute to Github</h4>
 
     <!-- container -->
-    <div class="container">        
+    <div class="container">
         <div class="main">
             <div class="title">
                 <i class="fa fa-github"></i>
@@ -20,7 +20,7 @@
             </div>
             <div class="description">
                 <h3>Inspired by twitter's typeahead.js.</h3>
-            </div>            
+            </div>
             <div class="project text-center">
                 <a href="https://github.com/madhankumar028/github-search" target="_blank">
                     project on github
@@ -29,16 +29,16 @@
             <div class="demo">
                 <div id="search-container">
                     <input name="searchField" id="search" type="text"
-                        placeholder="Search Github users..."/>                    
-                </div>             
-            </div>            
-        </div>        
-    </div>     
-    
+                        placeholder="Search Github users..."/>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- autocomplete-menu -->
     <div id="autocomplete-menu"></div>
 
-    <script id="template" type="text/x-handlebars-template">        
+    <script id="template" type="text/x-handlebars-template">
         {{#users}}
         <div class="dataset">
             <div class="userMenu">
@@ -49,7 +49,7 @@
                         {{#if bio}}
                             <p class="bio">{{bio}}</p>
                             {{else}}
-                                <p class="bio">{{name}} has not described anything about him</p>                                
+                                <p class="bio">{{name}} has not described anything about him</p>
                         {{/if}}
                     </div>
                     <div class="details">
@@ -62,12 +62,11 @@
         </div>
         {{/users}}
     </script>
-    
+
     <!-- Script loading -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js"></script>
-        
-    <script src="search.js" async></script>
+    <script src="search.js"></script>
 </body>
 </html>

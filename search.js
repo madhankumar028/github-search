@@ -34,7 +34,6 @@
         });
     }
 
-
     /**
      * Handler for keyup event
      *
@@ -49,23 +48,12 @@
 
         autoMenu.style.visibility = 'hidden';
 
-        if (event.which === 46) {
-            autoMenu.style.visibility = 'visible';
-            return;
-        }
-
-        // showing the default users, when there is no keypresponses
-        if (input.value.length === 0) {
-            autoMenu.style.visibility = 'visible';
-            return;
-        }
-
+        validateKeyupEvent(event);        
         // minimum length of github username is 3
         if (input.value.length >= 3) {
-
             clearTimeout(typingTimer);
 
-            typingTimer = setTimeout( () => {
+            typingTimer = setTimeout(() => {
                 while(autoMenu.firstChild) {
                     autoMenu.removeChild(autoMenu.firstChild);
                 }
@@ -76,10 +64,21 @@
                 }
 
                 if (!autoMenu.firstChild) {
-                    // keyupService(input.value);
                     getUser(input.value);
                 }
             }, doneTypingInterval);
+        }
+    }
+
+    function validateKeyupEvent(event) {
+        if (event.which === 46) {
+            autoMenu.style.visibility = 'visible';
+            return;
+        }
+        // showing the default users, when there is no keypresponses
+        if (input.value.length === 0) {
+            autoMenu.style.visibility = 'visible';
+            return;
         }
     }
 
