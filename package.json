@@ -21,7 +21,11 @@
   },
   "homepage": "https://github.com/madhankumar028/github-search#readme",
   "devDependencies": {
-    "lite-server": "^2.2.2"
+    "eslint": "^4.0.0",
+    "html-webpack-plugin": "^2.30.1",
+    "lite-server": "^2.2.2",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.8.2"
   },
   "dependencies": {
     "bootstrap": "^3.3.7",

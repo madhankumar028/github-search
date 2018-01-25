@@ -1,31 +1,26 @@
 * {
-    margin: 0px;
-    padding: 0px;    
+    margin: 0;
+    padding: 0;
     letter-spacing: 1px;
-    font-family: Helvetica;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
 }
 html {
-    font-size: 16px;    
+    font-size: 16px;
 }
 body {
-    background-color: lightgray;
+    background-image: linear-gradient( to left, #2A245F, #2a356c );
+    color: #e0e0e0;
 }
-.corner-ribbon {
-    position: absolute;
-    left: -60px;
-    top: 50px;
-    width: 250px;
-    text-align: center;
-    background: #757575;
-    color: #f0f0f0;
-    transform: rotate(-45deg);
-    box-shadow: 0 0 3px rgba(0,0,0,.3);
+.app-container {
+    margin: 5vh auto;
+    max-width: 600px;
 }
 .main {
     text-align: center;
 }
 .title {
-    margin: 20px 0 0 0;
+    margin-top: 20px;
     font-size: 3rem;
 }
 .description {
@@ -34,93 +29,62 @@ body {
     font-weight: bold;
 }
 .demo {
-    margin: 60px 0 0 0;
-}
-#search-container {
-    position: relative;
+    margin: 60px auto;
 }
 #search-container input {
-    padding: 5px;
+    padding: 15px 25px;
     font-size: 1.2em;
-    width: 500px;
-}
-#search {
-    position: relative;
-    outline: none;
-    color: #000;
-    z-index: 10;
-    border: 8px solid #757575;    
+    width: 100%;
+    background-color: #fafafa;
 }
 .profile-card {
-    padding-left: 50px;
-    width: 500px;
-    position: relative;
-    left: -75px;
-    box-sizing: border-box;
+    position: relative;    
 }
-.profile-card:hover {
-    background-color: #E0E0E0;
+.autocomplete-menu:hover {
+    transform: translateY(5);
 }
-#autocomplete-menu {
-    margin-top: 0px;
-    text-align: center;
-    padding: 0px 100px 0px 100px;
-    box-sizing: border-box;
+.autocomplete-menu {
+    margin: 20px auto;
+    min-height: 110px;
+    background-image: linear-gradient(to left, #35286f, #2e2969);
+    border-radius: 3%;
+    box-shadow: 0 1px 17px 0 rgba(95, 207, 128, 0.1), 0 31px 40px 0 rgba(0, 0, 0, 0.07);
+    transition: all 0.3s ease
 }
 .img-circle {
-    position: relative;
-    width: 50px;
-    right: 250px;
-    margin-top: 20px; 
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 30px;
+    left: 20px;    
 }
-.dataset {
-    margin: opx;
-    padding: 0px 400px;
+.image-holder {
+    display: inline;
 }
-.user-menu {
-    margin-right: 50px;
+.user {
+    display: inline-block;
+    margin: 20px 100px;
 }
-.name {
-    font-weight: bold;
-    font-size: 14px;
-}
-.bio {
-    font-size: 16px;
-}
-.repo {
-    margin-right: 10px;
-    color: #8899a6;
-    font-weight: 500px;
-}
-.followers {
-    font-weight: 10px;
-    color: #8899a6;
-}
-.following {
-    margin-right: 10px;
-    color: #8899a6;
-    font-weight: 500px;
-}
-.profile-details {
-    position: relative;
-    margin-top: -55px; 
-}
-.project {
-    margin-top: 25px;    
+.details {
+    display: inline-block;
+    margin: 20px 150px;
 }
 a {
-    color: #757575;    
-    text-decoration: none;    
+    color: #e0e0e0;
+    text-decoration: none;
 }
 .btn {
     display: inline-block;
     margin-top: 150px;
     position: relative;
     left: 575px;
-    height: 50px;    
+    height: 50px;
     width: 150px;
     cursor: pointer;
     padding-top: 12px;
     background-color: #757575;
     border-radius: 10px;
+}
+.extra-info {
+    margin-right: 5px;
 }
