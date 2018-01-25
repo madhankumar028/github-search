@@ -9,10 +9,10 @@
     'use strict';
 
     var input               = document.getElementById('search'),
-        autoMenu            = document.getElementById('autocomplete-menu'),
+        autoMenu            = document.getElementById('search-results'),
         loader              = document.getElementsByClassName('loader'),
         doneTypingInterval  = 3000,  //time in ms, 3seconds for example
-        memoize             = {users: []};
+        userList            = [];
 
     const defaultUsers  = ['getify', 'vasanthk', 'toddmotto', 'deedy'],
           client_id     = 'b7641fc061fbc7eba0ae',
@@ -22,17 +22,17 @@
           githubUrl     = 'https://github.com';
 
     // Service worker registration
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker
-                .register('/sw.js')
-                .then( (reg) => {
-                    console.log('Service worker is registered');
-                }, (err) => {
-                    console.log('Service worker is not registered');
-                });
-        });
-    }
+    // if ('serviceWorker' in navigator) {
+    //     window.addEventListener('load', () => {
+    //         navigator.serviceWorker
+    //             .register('/sw.js')
+    //             .then( (reg) => {
+    //                 console.log('Service worker is registered');
+    //             }, (err) => {
+    //                 console.log('Service worker is not registered');
+    //             });
+    //     });
+    // }
 
     /**
      * Handler for keyup event
@@ -97,14 +97,14 @@
         }
 
         // Removes the first child, if it goes more than 4 default users
-        if (autoMenu.childNodes.length > 4) {
+        if (autoMenu.childNodes.length) {
             autoMenu.removeChild(autoMenu.firstChild);
         }
 
         input.style.background = "url('assets/loader.gif') no-repeat right center";
 
-        defaultUsers.forEach( (user) => {
-            // responsetricting the construction of defaultuser after we got them
+        defaultUsers.forEach(user => {
+            // construction of default_user info
             if (autoMenu.childNodes.length < 3) {
                 getUser(user);
             } else {
@@ -119,29 +119,33 @@
 
         fetch(url)
         .then(response => response.json())
-        .then(data => data)
-        .then(user => constructUser(user));
+        .then(data => {
+            userList.push(data);
+            userCard(data);                    
+        })        
     }
 
-    /**
-     *
-     * Construction of user in DOM
-     *
-     * @pirvate
-     *
-     * @param  {Object} memoize
-     */
-    function constructUser(memoize) {
-
-        var template,
-            templateScript;
-
-        template = document.getElementById('template').innerHTML;
-
-        templateScript = Handlebars.compile(template);
-
-        autoMenu.innerHTML = templateScript(memoize);
-
+    function userCard(user) {
+        var userMarkup = `
+            <div class="profile-card">
+                <img class="img-circle" src=${user.avatar_url}>
+                <div class=" details">
+                    <h3 class="name">${user.name}</h3>
+                    ${user.bio 
+                        ? `<p class="bio">${user.bio}</p>`
+                        : `<p class="bio">${user.name} has not described anything about him</p>`
+                    }
+                </div>
+                <div class="details">
+                    <span class="extra-info">Repo:${user.public_repos}</span>
+                    <span class="extra-info">Following:${user.following}</span>
+                    <span class="extra-info">Followers:${user.followers}</span>
+                </div>
+            </div>                
+        `;
+                
+        autoMenu.innerHTML = userMarkup;
+        
         input.style.backgroundImage = 'none';
 
         autoMenu.style.visibility = 'visible';
@@ -156,6 +160,7 @@
             autoMenu.style.visibility = 'hidden';
             input.style.backgroundImage = 'none';
         });
+
         // EventListener for input element (keyup event)
         input.addEventListener('keyup', keyupHandler);
     }

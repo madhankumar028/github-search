@@ -5,27 +5,20 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 </head>
 <body>
-
-    <!-- ribbon -->
-    <h5 class="corner-ribbon">Tribute to Github</h4>
-
     <!-- container -->
-    <div class="container">
+    <div class="app-container">
         <div class="main">
             <div class="title">
                 <i class="fa fa-github"></i>
                 <span class="title">Github search.js</span>
-            </div>
-            <div class="description">
-                <h3>Inspired by twitter's typeahead.js.</h3>
-            </div>
-            <div class="project text-center">
-                <a href="https://github.com/madhankumar028/github-search" target="_blank">
-                    project on github
-                </a>
-            </div>
+            </div>            
+            <h3>Inspired by twitter's typeahead.js.</h3>                        
+            <a href="https://github.com/madhankumar028/github-search" target="_blank">
+                project on github
+            </a>            
             <div class="demo">
                 <div id="search-container">
                     <input name="searchField" id="search" type="text"
@@ -33,10 +26,24 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- autocomplete-menu -->
-    <div id="autocomplete-menu"></div>
+        <div id="search-results" class="autocomplete-menu">            
+            <!-- <div class="profile-card">
+                <div class="image-holder">
+                    <img class="img-circle" src="https://avatars2.githubusercontent.com/u/19890874?v=4">
+                </div>                        
+                <div class="details user">
+                    <h3 class="name">Madhankumar</h3>                        
+                    <p class="bio"></p>
+                    <p class="bio">Madhankumar has not described anything about him</p> 
+                </div>
+                <div class="details">
+                    <span class="extra-info">Repo: 32</span>
+                    <span class="extra-info">Following: 100</span>
+                    <span class="extra-info">Followers: 20</span>
+                </div>
+            </div> -->
+        </div>
+    </div> 
 
     <script id="template" type="text/x-handlebars-template">
         {{#users}}
@@ -53,9 +60,9 @@
                         {{/if}}
                     </div>
                     <div class="details">
-                        <span class="repo">Repo:{{public_repos}}</span>
-                        <span class="repo">Following:{{following}}</span>
-                        <span class="repo">Followers:{{followers}}</span>
+                        <span class="extra-info">extra-info:{{public_extra-infos}}</span>
+                        <span class="extra-info">Following:{{following}}</span>
+                        <span class="extra-info">Followers:{{followers}}</span>
                     </div>
                 </div>
             </div>
@@ -65,8 +72,8 @@
 
     <!-- Script loading -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js"></script> -->
     <script src="search.js"></script>
 </body>
 </html>
