@@ -22,7 +22,7 @@
   "homepage": "https://github.com/madhankumar028/github-search#readme",
   "devDependencies": {
     "eslint": "^4.0.0",
-    "html-webpack-plugin": "^2.30.1",
+    "html-webpack-plugin": "^5.5.0",
     "lite-server": "^2.2.2",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.8.2"
